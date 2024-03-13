@@ -45,14 +45,14 @@ if (isset($_GET['act'])) {
             if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $tenloai = $_POST['tenloai'];
                 $id = $_POST['id'];
-                $sql = "update danhmuc set name='" . $tenloai . "'where id=" . $id;
+                $sql = "update danhmuc set TenDanhMuc='" . $tenloai . "'where IDDanhMuc=" . $id;
                 pdo_execute($sql);
                 $thongbao = "Cập nhật thành công";
             }
             $listdanhmuc = loadall_danhmuc();
             include "danhmuc/list.php";
             break;
-            /* Controler sản phẩm */
+        /* Controler sản phẩm */
         case 'addsp':
             // kiểm tra xem người dung có click vào nút add ko 
             if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
@@ -167,7 +167,7 @@ if (isset($_GET['act'])) {
                 $id = $_GET['id'];
                 $iduser = $_GET['iduser'];
             }
-            $taikhoan =  loadone_taikhoan($iduser);
+            $taikhoan = loadone_taikhoan($iduser);
             $cart = loadcart_cthoadon($id);
             $bill = loadone_bill($id);
             include "donhang/ctdh.php";

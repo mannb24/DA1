@@ -31,7 +31,7 @@
                                                     <?php
                                                     foreach ($listdanhmuc as $danhmuc) {
                                                         extract($danhmuc);
-                                                        echo '<option value="' . $id . '">' . $name . '</option>';
+                                                        echo '<option value="' . $IDDanhMuc . '">' . $TenDanhMuc . '</option>';
                                                     }
                                                     ?>
                                                 </select>
@@ -53,12 +53,15 @@
                                                 <textarea name="mota" id="" cols="30" rows="10"></textarea>
                                             </div>
                                             <div style="margin: 20px 0 0 15px;" class="">
-                                                <input class="btn-primary" type="submit" name="themmoi" value="THÊM MỚI">
+                                                <input class="btn-primary" type="submit" name="themmoi"
+                                                    value="THÊM MỚI">
                                                 <input class="btn-secondary" type="reset" value="NHẬP LẠI">
-                                                <a href="index.php?act=listsp"><input class="btn-success" type="button" value="Danh sách"></a>
+                                                <a href="index.php?act=listsp"><input class="btn-success" type="button"
+                                                        value="Danh sách"></a>
                                             </div>
                                             <?php
-                                            if (isset($thongbao) && ($thongbao != "")) echo $thongbao;
+                                            if (isset($thongbao) && ($thongbao != ""))
+                                                echo $thongbao;
                                             ?>
                                         </form>
                                     </div>

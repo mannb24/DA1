@@ -65,7 +65,7 @@
                                     <?php
                                     if (isset($_SESSION['user'])) {
                                         $user = $_SESSION['user'];
-                                    ?>
+                                        ?>
                                         <li class="account">
                                             <a href="#">
                                                 Xin chào!!
@@ -73,20 +73,23 @@
                                             </a>
                                             <ul class="account_selection">
 
-                                                <li><a href="index.php?act=edit_taikhoan"><i class="fa fa-user-plus" aria-hidden="true"></i>Thông tin</a></li>
+                                                <li><a href="index.php?act=edit_taikhoan"><i class="fa fa-user-plus"
+                                                            aria-hidden="true"></i>Thông tin</a></li>
                                                 <?php
-                                                if ($user['role'] == 1) {
-                                                ?>
-                                                    <li><a href="admin"><i class="fa fa-user-plus" aria-hidden="true"></i>Admin</a></li>
+                                                if ($user['Role'] == 1) {
+                                                    ?>
+                                                    <li><a href="admin"><i class="fa fa-user-plus"
+                                                                aria-hidden="true"></i>Admin</a></li>
                                                 <?php } ?>
-                                                <li><a href="index.php?act=thoat"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng xuất</a></li>
+                                                <li><a href="index.php?act=thoat"><i class="fa fa-user-plus"
+                                                            aria-hidden="true"></i>Đăng xuất</a></li>
                                             </ul>
                                         </li>
 
-                                    <?php
+                                        <?php
 
                                     } else {
-                                    ?>
+                                        ?>
 
                                         <li class="account">
                                             <a href="#">
@@ -94,11 +97,13 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
                                             <ul class="account_selection">
-                                                <li><a href="index.php?act=dangnhap"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                                <li><a href="index.php?act=dangky"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                                <li><a href="index.php?act=dangnhap"><i class="fa fa-sign-in"
+                                                            aria-hidden="true"></i>Sign In</a></li>
+                                                <li><a href="index.php?act=dangky"><i class="fa fa-user-plus"
+                                                            aria-hidden="true"></i>Register</a></li>
                                             </ul>
                                         </li>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </ul>
@@ -129,7 +134,8 @@
                                     <li>
                                         <form action="index.php?act=categories" method="post">
                                             <input type="text" name="kyw" style="width: 200px;">
-                                            <input type="submit" name="timkiem" value="Tìm kiếm" style="margin: 5px; background-color: red;  color: white;">
+                                            <input type="submit" name="timkiem" value="Tìm kiếm"
+                                                style="margin: 5px; background-color: red;  color: white;">
                                         </form>
                                     </li>
                                     </li>

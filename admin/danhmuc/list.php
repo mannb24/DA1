@@ -105,7 +105,8 @@
         background-color: #4CAF50;
         color: black;
     }
-    .row10.button{
+
+    .row10.button {
         padding: 7px;
         border: 3px;
         box-sizing: 3px;
@@ -144,12 +145,12 @@
                                 <?php
                                 foreach ($listdanhmuc as $danhmuc) {
                                     extract($danhmuc);
-                                    $suadm = "index.php?act=suadm&id=" . $id;
-                                    $xoadm = "index.php?act=xoadm&id=" . $id;
+                                    $suadm = "index.php?act=suadm&id=" . $IDDanhMuc;
+                                    $xoadm = "index.php?act=xoadm&id=" . $IDDanhMuc;
                                     echo '<tr>
                                     <td><input type="checkbox"></td>
-                                    <td>' . $id . '</td>
-                                    <td>' . $name . '</td>
+                                    <td>' . $IDDanhMuc . '</td>
+                                    <td>' . $TenDanhMuc . '</td>
                                     <td><a href="' . $suadm . '"><input type="button" value="Sửa"></a> <a href="' . $xoadm . '"><input type="button" value="Xoá"></a></td>
                                 </tr>';
                                 }

@@ -7,7 +7,8 @@ include "./model/taikhoan.php";
 include "./model/cart.php";
 include "./views/header.php";
 
-if (!isset($_SESSION['mycart'])) $_SESSION['mycart'] = [];
+if (!isset($_SESSION['mycart']))
+    $_SESSION['mycart'] = [];
 
 $spnew = loadall_sanpham_trangchu();
 $dmsp = loadall_danhmuc();
@@ -58,14 +59,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
-                $user = $_POST['user'];
-                $pass = $_POST['pass'];
+                $user = $_POST['taikhoan'];
+                $pass = $_POST['matkhau'];
                 $checkuser = checkuser($user, $pass);
                 if (is_array($checkuser)) {
                     $_SESSION['user'] = $checkuser;
 
                     // Kiểm tra vai trò
-                    if ($checkuser['role'] == 1) {
+                    if ($checkuser['Role'] == 1) {
                         // Nếu vai trò là 1 (admin), chuyển hướng đến trang quản trị admin
                         echo "<script>
                                     window.location.href='admin/index.php';
@@ -148,29 +149,29 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             }
             include "./views/cart/viewcart.php";
             break;
-            case 'updatecart':
-                if (isset($_POST["updatecart"])) {
-                    $fl = 0;
-                    $updatedQuantity = intval($_POST['soluong']);
-            
-                    // Ensure the updated quantity is within the allowed range (1 to 15)
-                    if ($updatedQuantity < 1) {
-                        $updatedQuantity = 1;
-                    } elseif ($updatedQuantity > 10) {
-                        $updatedQuantity = 10;
-                    }
-            
-                    for ($i = 0; $i < sizeof($_SESSION['mycart']); $i++) {
-                        if ($_SESSION['mycart'][$i][0] == $_GET["id"]) {
-                            $fl = 1;
-                            $_SESSION['mycart'][$i][4] = $updatedQuantity;
-                            break;
-                        }
+        case 'updatecart':
+            if (isset($_POST["updatecart"])) {
+                $fl = 0;
+                $updatedQuantity = intval($_POST['soluong']);
+
+                // Ensure the updated quantity is within the allowed range (1 to 15)
+                if ($updatedQuantity < 1) {
+                    $updatedQuantity = 1;
+                } elseif ($updatedQuantity > 10) {
+                    $updatedQuantity = 10;
+                }
+
+                for ($i = 0; $i < sizeof($_SESSION['mycart']); $i++) {
+                    if ($_SESSION['mycart'][$i][0] == $_GET["id"]) {
+                        $fl = 1;
+                        $_SESSION['mycart'][$i][4] = $updatedQuantity;
+                        break;
                     }
                 }
-                include "./views/cart/viewcart.php";
-                break;
-            
+            }
+            include "./views/cart/viewcart.php";
+            break;
+
         case 'deletecart':
             if (isset($_GET['idcart'])) {
                 array_splice($_SESSION['mycart'], $_GET['idcart'], 1);
@@ -197,17 +198,19 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     include "./views/cart/viewcart.php";
                 } else {
                     $iduser = $_SESSION['user']['id'];
-                    $taikhoan =  loadone_taikhoan($iduser);
+                    $taikhoan = loadone_taikhoan($iduser);
 
                     include "./views/cart/bill.php";
                 }
             }
-            
+
             break;
         case 'billcomfirm':
             if (isset($_POST['dongydathang']) && ($_POST['dongydathang'])) {
-                if (isset($_SESSION['user'])) $iduser = $_SESSION['user']['id'];
-                else $iduser = 0;
+                if (isset($_SESSION['user']))
+                    $iduser = $_SESSION['user']['id'];
+                else
+                    $iduser = 0;
                 $pttt = $_POST['pttt'];
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                 $ngaydathang = date('d/m/Y h:i A');
@@ -218,7 +221,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 }
                 $_SESSION['mycart'] = [];
             }
-            $taikhoan =  loadone_taikhoan($iduser);
+            $taikhoan = loadone_taikhoan($iduser);
             $bill = loadone_bill($idbill);
             $billct = load_cart($idbill);
             include "./views/cart/billconfirm.php";
@@ -227,12 +230,19 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             $listbill = loadall_bill($_SESSION['user']['id']);
             include "./views/cart/mybill.php";
             break;
+        case 'categories&iddm':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+            }
+            $dssp = loadall_sanpham($kyw, $id);
+            include "./views/categories.php";
+            break;
         case 'ctdh':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $iduser = $_GET['iduser'];
             }
-            $taikhoan =  loadone_taikhoan($iduser);
+            $taikhoan = loadone_taikhoan($iduser);
             $cart = loadcart_cthoadon($id);
             $bill = loadone_bill($id);
             include "./views/cart/chitietdonhang.php";

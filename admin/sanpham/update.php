@@ -2,7 +2,7 @@
 if (is_array($sanpham)) {
     extract($sanpham);
 }
-$hinhpath = "../upload/" . $img;
+$hinhpath = "../views/images/" . $AnhBia;
 if (is_file($hinhpath)) {
     $hinh = "<img src='" . $hinhpath . "' height = '80'>";
 } else {
@@ -45,10 +45,10 @@ if (is_file($hinhpath)) {
                                                 <?php
                                                 foreach ($listdanhmuc as $value) {
                                                     // extract($danhmuc);
-                                                    if ($iddm == $value['id']) {
-                                                        echo '<option value="' . $value['id'] . '"selected>' . $value['name'] . '</option>';
+                                                    if ($IDDanhMuc == $value['id']) {
+                                                        echo '<option value="' . $value['IDDanhMuc'] . '"selected>' . $value['TenDanhMuc'] . '</option>';
                                                     } else {
-                                                        echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                                        echo '<option value="' . $value['IDDanhMuc'] . '">' . $value['TenDanhMuc'] . '</option>';
                                                     }
                                                 }
                                                 ?>
@@ -56,11 +56,11 @@ if (is_file($hinhpath)) {
                                         </div>
                                         <div class="row mb10">
                                             Tên sản phẩm <br>
-                                            <input type="text" name="tensp" value="<?= $name ?>">
+                                            <input type="text" name="tensp" value="<?= $TenSanPham ?>">
                                         </div>
                                         <div class="row mb10">
                                             Giá <br>
-                                            <input type="text" name="giasp" value="<?= $price ?>">
+                                            <input type="text" name="giasp" value="<?= $Gia ?>">
                                         </div>
                                         <div class="row mb10">
                                             Hình ảnh <br>
@@ -68,15 +68,17 @@ if (is_file($hinhpath)) {
                                             <?= $hinh ?>
                                         </div>
                                         <div class="row mb10">Mô tả <br>
-                                            <textarea name="mota" id="" cols="30" rows="10"><?= $mota ?></textarea>
+                                            <textarea name="mota" id="" cols="30" rows="10"><?= $Mota ?></textarea>
                                         </div>
                                         <div class="row mb10">
-                                            <input type="hidden" name="id" value="<?= $id ?>">
+                                            <input type="hidden" name="id" value="<?= $IDSanPham ?>">
                                             <input class="btn-primary" type="submit" name="capnhat" value="Cập nhật">
-                                            <a href="index.php?act=listsp"><input class="btn-success" type="button" value="Danh sách"></a>
+                                            <a href="index.php?act=listsp"><input class="btn-success" type="button"
+                                                    value="Danh sách"></a>
                                         </div>
                                         <?php
-                                        if (isset($thongbao) && ($thongbao != "")) echo $thongbao;
+                                        if (isset($thongbao) && ($thongbao != ""))
+                                            echo $thongbao;
 
                                         ?>
                                     </form>

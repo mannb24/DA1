@@ -69,7 +69,7 @@
                                         <li class="account">
                                             <a href="#">
                                                 Xin chào!!
-                                                <?= $user['user'] ?>
+                                                <?= $user['Ten'] ?>
                                             </a>
                                             <ul class="account_selection">
 

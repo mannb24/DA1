@@ -25,7 +25,7 @@ function loadall_sanpham($kyw = "", $iddm = 0)
     if ($iddm > 0) {
         $sql .= " and IDDanhMuc= '" . $iddm . "'";
     }
-    $sql .= " order by IDDanhMuc desc";
+    $sql .= " order by IDSanPham desc";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

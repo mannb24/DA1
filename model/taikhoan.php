@@ -47,4 +47,5 @@ function delete_taikhoan($id)
     $sql = "delete from user where IDNguoi=" . $id;
     pdo_execute($sql);
 }
+
 ?>

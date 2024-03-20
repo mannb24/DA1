@@ -49,7 +49,7 @@ function loadone_sanpham($id)
 }
 function load_sanphamcungloai($id, $iddm)
 {
-    $sql = "SELECT * from sanpham where IDDanhMuc= " . $iddm . " AND IDSanPham != " . $id;
+    $sql = "SELECT * from sanpham where IDDanhMuc" . $iddm . " AND IDSanPham <> " . $id;
 
     $listsanpham = pdo_query($sql);
     return $listsanpham;

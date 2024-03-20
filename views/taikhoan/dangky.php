@@ -11,7 +11,9 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
+p{
+    color: red;
+}   
         section {
             padding-top: 100px;
             position: relative;
@@ -41,11 +43,7 @@
             margin-bottom: 20px; /* Added margin */
         }
 
-        .input-box {
-            position: relative;
-            width: 100%;
-            margin-bottom: 20px;
-        }
+       
 
         .input-box .input {
             width: 100%;
@@ -56,15 +54,10 @@
             outline: none;
             padding: 0 20px;
             color: #fff;
+            margin-bottom: 10px;
         }
 
-        .input-box .icon {
-            position: absolute;
-            top: 50%;
-            left: 10px; /* Adjusted left position */
-            transform: translateY(-50%);
-            color: #FF6633;
-        }
+       
 
         .remember-forgot {
             color: #fff;
@@ -113,39 +106,57 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        .form {
+            margin-top: 50px;
+        }
+   
     </style>
+    <script>
+    // Cuộn trang đến đầu phần header
+    window.scrollTo(0, 0);
+</script>
 </head>
 <body>  
     <section>
         <div class="login">
             <h2> Đăng Ký </h2>
-            <form action="index.php?act=dangky" method="POST">
-                <div class="input-box">
-                    <i class="icon">&#xf007;</i>
-                    <input type="text" name="user" class="input" placeholder="Enter user name" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <i class="icon">&#xf023;</i>
-                    <input type="password" name="pass" class="input" placeholder="Enter your password" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <i class="icon">&#xf0e0;</i>
-                    <input type="email" name="email" class="input" placeholder="Enter your email" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <i class="icon">&#xf10b;</i>
-                    <input type="tel" name="tel" class="input" placeholder="Enter your phone" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <i class="icon">&#xf041;</i>
-                    <input type="text" name="address" class="input" placeholder="Enter your address" autocomplete="off" required>
-                </div>
-                <input class="button" type="submit" value="Đăng ký ngay" name="dangky">
-                <div class="register-link">
-                    <p>Not a member?</p>
-                    <a href="index.php?act=dangnhap">Bạn đã có tài khoản</a>
-                </div>
-            </form>
+            <form action="index.php?act=dangky" class="form " method="POST">
+            <div class="input-box">
+                <input type="text" name="user" class="input" placeholder="Enter user name" autocomplete="off">
+            </div>
+            <?php if(isset($errors['user'])): ?>
+                <p class="error"><?php echo $errors['user']; ?></p>
+            <?php endif; ?>
+            <div class="input-box">
+                <input type="password" name="pass" class="input" placeholder="Enter your password" autocomplete="off">
+            </div>
+            <?php if(isset($errors['pass'])): ?>
+                <p class="error"><?php echo $errors['pass']; ?></p>
+            <?php endif; ?>
+            <div class="input-box">
+                <input type="email" name="email" class="input" placeholder="Enter your email" autocomplete="off">
+            </div>
+            <?php if(isset($errors['email'])): ?>
+                <p class="error"><?php echo $errors['email']; ?></p>
+            <?php endif; ?>
+            <div class="input-box">
+                <input type="tel" name="tel" class="input" placeholder="Enter your phone" autocomplete="off">
+            </div>
+            <?php if(isset($errors['tel'])): ?>
+                <p class="error"><?php echo $errors['tel']; ?></p>
+            <?php endif; ?>
+            <div class="input-box">
+                <input type="text" name="address" class="input" placeholder="Enter your address" autocomplete="off">
+            </div>
+            <?php if(isset($errors['address'])): ?>
+                <p class="error"><?php echo $errors['address']; ?></p>
+            <?php endif; ?>
+            <input class="button" type="submit" value="Đăng ký ngay" name="dangky">
+            <div class="register-link">
+                <p>Not a member?</p>
+                <a href="index.php?act=dangnhap">Bạn đã có tài khoản</a>
+            </div>
+        </form>
             <p class="thongbao">
                 <?php
                 if (isset($thongbao) && ($thongbao != "")) {

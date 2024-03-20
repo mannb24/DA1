@@ -89,9 +89,11 @@
 </head>
 <div class="container single_product_container">
 	<div class="row">
-		<?php
-		extract($onesp);
-		extract($dmsp = loadall_danhmuc($onesp['iddm']));
+
+		<?php extract($onesp);
+
+		extract($dmsp = loadall_danhmuc($onesp['IDDanhMuc']));
+
 		?>
 
 		<div class="col">
@@ -101,9 +103,9 @@
 			<div class="breadcrumbs d-flex flex-row align-items-center">
 				<ul>
 					<li><a href="index.php">Trang chủ</a></li>
-					<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i><?= $dmsp['name'] ?></a></li> -->
+					<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li> -->
 					<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>
-							<?= $onesp['name'] ?>
+							<?= $onesp['TenSanPham'] ?>
 						</a></li>
 				</ul>
 			</div>
@@ -120,7 +122,7 @@
 					<div class="col-lg-11 image_col order-lg-2 order-1">
 						<div class="single_product_image">
 							<div class="single_product_image_background"
-								style="background-image:url(views/images/<?= $onesp['img'] ?>)"></div>
+								style="background-image:url(views/images/<?= $onesp['AnhBia'] ?>)"></div>
 						</div>
 					</div>
 				</div>
@@ -130,39 +132,39 @@
 		<div class="col-lg-5">
 			<div class="product_details">
 				<div class="product_details_title">
+
 					<h2>
-						<?= $onesp['name'] ?>
+						<?= $onesp['TenSanPham'] ?>
 					</h2>
 					<p>
-						<?= $onesp['mota'] ?>
+						<?= $onesp['Mota'] ?>
 					</p>
 				</div>
 				<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 					<span class="ti-truck"></span><span>Miễn phí giao hàng</span>
 				</div>
+
 				<div class="original_price">
-					<?= number_format($onesp['price'] * 120 / 100) ?> $
+					<?= number_format($onesp['Gia'] * 120 / 100) ?> $
 				</div>
 				<div class="product_price">
-					<?= number_format($onesp['price']) ?> $
+					<?= number_format($onesp['Gia']) ?> $
 				</div>
-
-
 				<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-					<!-- <span>SL :</span>
-						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
-							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-						</div> -->
+					<span>SL :</span>
+					<div class="quantity_selector">
+						<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+						<span id="quantity_value">1</span>
+						<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+					</div>
 
 					<form action="index.php?act=addtocart" method="post">
 						<!-- ... (previous input fields remain unchanged) ... -->
 						<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-							<input type="hidden" name="id" value="<?= $onesp['id'] ?>">
-							<input type="hidden" name="name" value="<?= $onesp['name'] ?>">
-							<input type="hidden" name="img" value="<?= $onesp['img'] ?>">
-							<input type="hidden" name="price" value="<?= $onesp['price'] ?>">
+							<input type="hidden" name="id" value="<?= $onesp['IDSanPham'] ?>">
+							<input type="hidden" name="name" value="<?= $onesp['TenSanPham'] ?>">
+							<input type="hidden" name="img" value="<?= $onesp['AnhBia'] ?>">
+							<input type="hidden" name="price" value="<?= $onesp['Gia'] ?>">
 							<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 								<span>Số lượng:</span>
 								<div class="quantity_selector">
@@ -177,20 +179,6 @@
 												aria-hidden="true"></i></div>
 									</span>
 								</div>
-								<!-- Size selection -->
-								<div class="size_selector">
-									<label for="size">Chọn size:</label>
-									<select id="size" name="size">
-										<option value="S">S</option>
-										<option value="M">M</option>
-										<option value="L">L</option>
-										<option value="XL">XL</option>
-										<!-- Add more size options as needed -->
-									</select>
-								</div>
-								<input style="margin:0px 0px 0px 20px;padding:6px;" class="btn-danger" type="submit"
-									name="addtocart" value="Thêm vào giỏ hàng">
-							</div>
 					</form>
 				</div>
 			</div>
@@ -230,25 +218,25 @@
 							<div class="product-item men">
 								<div class="product discount product_filter">
 									<div class="product_image">
-										<a href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">
-											<img src="views/images/<?= $sp['img'] ?>" alt="">
+										<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
+											<img src="views/images/<?= $sp['AnhBia'] ?>" alt="">
 										</a>
 									</div>
 									<div class="favorite favorite_left"></div>
 									<div class="product_info">
-										<h6 class="product_name"><a href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">
-												<?= $sp['name'] ?>
+										<h6 class="product_name"><a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
+												<?= $sp['TenSanPham'] ?>
 											</a></h6>
 										<div class="product_price">
-											<?= number_format($sp['price']) ?>
+											<?= number_format($sp['Gia']) ?>
 											$<span>
-												<?= number_format($sp['price'] * 110 / 100) ?> $
+												<?= number_format($sp['Gia'] * 110 / 100) ?> $
 											</span>
 										</div>
 									</div>
 								</div>
 								<div class="red_button add_to_cart_button"><a
-										href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">Chi tiết sản phẩm</a></div>
+										href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
 							</div>
 						<?php endforeach; ?>
 					</div>

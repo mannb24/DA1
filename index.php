@@ -44,18 +44,44 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 include "./views/home.php";
             }
             break;
-        case 'dangky':
-            if (isset($_POST['dangky']) && ($_POST['dangky'])) {
-                $user = $_POST['user'];
-                $pass = $_POST['pass'];
-                $email = $_POST['email'];
-                $address = $_POST['address'];
-                $tel = $_POST['tel'];
-                insert_taikhoan($user, $pass, $email, $address, $tel);
-                $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
-            }
-            include "./views/taikhoan/dangky.php";
-            break;
+            case 'dangky':
+                if (isset($_POST['dangky']) && ($_POST['dangky'])) {
+                    $user = $_POST['user'];
+                    $pass = $_POST['pass'];
+                    $email = $_POST['email'];
+                    $address = $_POST['address'];
+                    $tel = $_POST['tel'];
+                    $errors = [];
+            
+                    if (empty($user)) {
+                        $errors['user'] = "Vui lòng nhập tên người dùng";
+                    }
+            
+                    if (empty($pass)) {
+                        $errors['pass'] = "Vui lòng nhập mật khẩu";
+                    }
+            
+                    if (empty($email)) {
+                        $errors['email'] = "Vui lòng nhập địa chỉ email";
+                    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $errors['email'] = "Địa chỉ email không hợp lệ";
+                    }
+            
+                    if (empty($address)) {
+                        $errors['address'] = "Vui lòng nhập địa chỉ";
+                    }
+            
+                    if (empty($tel)) {
+                        $errors['tel'] = "Vui lòng nhập số điện thoại";
+                    }
+            
+                    if (empty($errors)) {
+                        insert_taikhoan($user, $pass, $email, $address, $tel);
+                        $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
+                    }
+                }
+                include "./views/taikhoan/dangky.php";
+                break;
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
                 $user = $_POST['taikhoan'];

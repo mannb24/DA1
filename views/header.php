@@ -43,6 +43,15 @@
 
     $dmsp = loadall_danhmuc();
     ?>
+    <div class="error-container">
+        <?php if (isset($errors) && !empty($errors)) : ?>
+            <div class="error-message">
+                <?php foreach ($errors as $error) : ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
     <div class="super_container">
 
         <!-- Header -->
@@ -120,7 +129,7 @@
                     <div class="row">
                         <div class="col-lg-12 text-right">
                             <div class="logo_container">
-                                <a href="#">Men<span>Strore</span></a>
+                                <a href="index.php">Men<span>Strore</span></a>
                             </div>
                             <nav class="navbar">
                                 <ul class="navbar_menu">

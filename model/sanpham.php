@@ -49,10 +49,12 @@ function loadone_sanpham($id)
 }
 function load_sanphamcungloai($id, $iddm)
 {
-    $sql = "select * from sanpham where IDDanhMuc=" . $iddm . " AND IDSanPham <>" . $id;
+    $sql = "select * from sanpham where IDDanhMuc" . $iddm . " AND IDSanPham <>" . $id;
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
+
+
 function update_sanpham($id, $iddm, $tensp, $giasp, $mota, $hinh)
 {
     if ($hinh != "") {

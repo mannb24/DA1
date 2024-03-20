@@ -39,7 +39,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
                 extract($onesp);
-                $sp_cung_loai = load_sanphamcungloai($id, $iddm);
                 include "./views/chitietsp.php";
             } else {
                 include "./views/home.php";

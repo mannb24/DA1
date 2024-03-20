@@ -60,25 +60,25 @@
 	}
 
 	.size_selector {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
+		display: flex;
+		align-items: center;
+		margin-top: 10px;
+	}
 
-.size_selector label {
-    margin-right: 10px;
-}
+	.size_selector label {
+		margin-right: 10px;
+	}
 
-.size_selector select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+	.size_selector select {
+		padding: 8px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
 
-.btn-danger {
-    margin: 0 0 0 20px;
-    padding: 6px;
-}
+	.btn-danger {
+		margin: 0 0 0 20px;
+		padding: 6px;
+	}
 
 	/* ... (previous styles remain unchanged) ... */
 </style>
@@ -89,9 +89,9 @@
 </head>
 <div class="container single_product_container">
 	<div class="row">
-		<?php extract($onesp);
-
-		// extract($dmsp=loadall_danhmuc($onesp['iddm']));
+		<?php
+		extract($onesp);
+		extract($dmsp = loadall_danhmuc($onesp['iddm']));
 		?>
 
 		<div class="col">
@@ -102,7 +102,9 @@
 				<ul>
 					<li><a href="index.php">Trang chủ</a></li>
 					<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i><?= $dmsp['name'] ?></a></li> -->
-					<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i><?= $onesp['name'] ?></a></li>
+					<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>
+							<?= $onesp['name'] ?>
+						</a></li>
 				</ul>
 			</div>
 
@@ -117,7 +119,8 @@
 					</div>
 					<div class="col-lg-11 image_col order-lg-2 order-1">
 						<div class="single_product_image">
-							<div class="single_product_image_background" style="background-image:url(views/images/<?= $onesp['img'] ?>)"></div>
+							<div class="single_product_image_background"
+								style="background-image:url(views/images/<?= $onesp['img'] ?>)"></div>
 						</div>
 					</div>
 				</div>
@@ -127,14 +130,22 @@
 		<div class="col-lg-5">
 			<div class="product_details">
 				<div class="product_details_title">
-					<h2><?= $onesp['name'] ?></h2>
-					<p><?= $onesp['mota'] ?></p>
+					<h2>
+						<?= $onesp['name'] ?>
+					</h2>
+					<p>
+						<?= $onesp['mota'] ?>
+					</p>
 				</div>
 				<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 					<span class="ti-truck"></span><span>Miễn phí giao hàng</span>
 				</div>
-				<div class="original_price"><?= number_format($onesp['price'] * 120 / 100) ?> $</div>
-				<div class="product_price"><?= number_format($onesp['price']) ?> $</div>
+				<div class="original_price">
+					<?= number_format($onesp['price'] * 120 / 100) ?> $
+				</div>
+				<div class="product_price">
+					<?= number_format($onesp['price']) ?> $
+				</div>
 
 
 				<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
@@ -148,34 +159,38 @@
 					<form action="index.php?act=addtocart" method="post">
 						<!-- ... (previous input fields remain unchanged) ... -->
 						<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<input type="hidden" name="id" value="<?=$onesp['id']?>">
-	                        <input type="hidden" name="name" value="<?=$onesp['name']?>">
-	                        <input type="hidden" name="img" value="<?=$onesp['img']?>">
-	                        <input type="hidden" name="price" value="<?=$onesp['price']?>">
-	                        <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-							<span>Số lượng:</span>
-							<div class="quantity_selector">
-								<span class="minus">
-									<div class="buttongiam btn-secondary"><i class="fa fa-minus" aria-hidden="true"></i></div>
-								</span>
-								<input style="margin: 15px 0px;width: 30px;text-align:center;" type="text" id="quantity" name="soluong" value=1><br>
-								<span class="plus">
-									<div class="buttontang btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></div>
-								</span>
+							<input type="hidden" name="id" value="<?= $onesp['id'] ?>">
+							<input type="hidden" name="name" value="<?= $onesp['name'] ?>">
+							<input type="hidden" name="img" value="<?= $onesp['img'] ?>">
+							<input type="hidden" name="price" value="<?= $onesp['price'] ?>">
+							<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+								<span>Số lượng:</span>
+								<div class="quantity_selector">
+									<span class="minus">
+										<div class="buttongiam btn-secondary"><i class="fa fa-minus"
+												aria-hidden="true"></i></div>
+									</span>
+									<input style="margin: 15px 0px;width: 30px;text-align:center;" type="text"
+										id="quantity" name="soluong" value=1><br>
+									<span class="plus">
+										<div class="buttontang btn-secondary"><i class="fa fa-plus"
+												aria-hidden="true"></i></div>
+									</span>
+								</div>
+								<!-- Size selection -->
+								<div class="size_selector">
+									<label for="size">Chọn size:</label>
+									<select id="size" name="size">
+										<option value="S">S</option>
+										<option value="M">M</option>
+										<option value="L">L</option>
+										<option value="XL">XL</option>
+										<!-- Add more size options as needed -->
+									</select>
+								</div>
+								<input style="margin:0px 0px 0px 20px;padding:6px;" class="btn-danger" type="submit"
+									name="addtocart" value="Thêm vào giỏ hàng">
 							</div>
-							<!-- Size selection -->
-							<div class="size_selector">
-								<label for="size">Chọn size:</label>
-								<select id="size" name="size" >
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L">L</option>
-									<option value="XL">XL</option>
-									<!-- Add more size options as needed -->
-								</select>
-							</div>
-							<input style="margin:0px 0px 0px 20px;padding:6px;" class="btn-danger" type="submit" name="addtocart" value="Thêm vào giỏ hàng">
-						</div>
 					</form>
 				</div>
 			</div>
@@ -192,7 +207,8 @@
 		<div class="row">
 			<div class="col">
 				<div class="tabs_container">
-					<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+					<ul
+						class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
 						<li class="tab active" data-active-tab="tab_1"><span>Sản phẩm cùng loại</span></li>
 
 						<li class="tab" data-active-tab="tab_3"><span>Bình luận</span></li>
@@ -210,7 +226,7 @@
 						<div class="col-xl-12 tab_title">
 							<h4>Sản phẩm cùng loại</h4>
 						</div>
-						<?php foreach ($sp_cung_loai as $sp) : ?>
+						<?php foreach ($sp_cung_loai as $sp): ?>
 							<div class="product-item men">
 								<div class="product discount product_filter">
 									<div class="product_image">
@@ -220,27 +236,34 @@
 									</div>
 									<div class="favorite favorite_left"></div>
 									<div class="product_info">
-										<h6 class="product_name"><a href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>"><?= $sp['name'] ?></a></h6>
-										<div class="product_price"><?= number_format($sp['price']) ?>
-											$<span><?= number_format($sp['price'] * 110 / 100) ?> $</span></div>
+										<h6 class="product_name"><a href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">
+												<?= $sp['name'] ?>
+											</a></h6>
+										<div class="product_price">
+											<?= number_format($sp['price']) ?>
+											$<span>
+												<?= number_format($sp['price'] * 110 / 100) ?> $
+											</span>
+										</div>
 									</div>
 								</div>
-								<div class="red_button add_to_cart_button"><a href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">Chi tiết sản phẩm</a></div>
+								<div class="red_button add_to_cart_button"><a
+										href="index.php?act=ctsp&idsp=<?= $sp['id'] ?>">Chi tiết sản phẩm</a></div>
 							</div>
 						<?php endforeach; ?>
 					</div>
 				</div>
-				
+
 				<div id="tab_3" class="tab_container">
-	                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	                    <script>
-	                    $(document).ready(function() {
-	                        $("#binhluan").load("views/binhluan/binhluanform.php", {
-	                            $idpro: <?=$id?>
-	                        });
-	                    });
-	                    </script>
-	                </div>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+					<script>
+						$(document).ready(function () {
+							$("#binhluan").load("views/binhluan/binhluanform.php", {
+								$idpro: <?= $id ?>
+							});
+						});
+					</script>
+				</div>
 			</div>
 		</div>
 
@@ -297,34 +320,34 @@
 
 <!-- Newsletter -->
 <script>
-    let tang = document.querySelector(".buttontang");
-    let giam = document.querySelector(".buttongiam");
-    let quantity = document.querySelector("#quantity");
+	let tang = document.querySelector(".buttontang");
+	let giam = document.querySelector(".buttongiam");
+	let quantity = document.querySelector("#quantity");
 
-    tang.onclick = () => {
-        quantity.value++;
-        checkQuantityLimit();
-    }
+	tang.onclick = () => {
+		quantity.value++;
+		checkQuantityLimit();
+	}
 
-    giam.onclick = () => {
-        quantity.value--;
-        if (quantity.value <= 0) {
-            quantity.value = 1;
-        }
-        checkQuantityLimit();
-    }
+	giam.onclick = () => {
+		quantity.value--;
+		if (quantity.value <= 0) {
+			quantity.value = 1;
+		}
+		checkQuantityLimit();
+	}
 
-    quantity.oninput = () => {
-        checkQuantityLimit();
-    }
+	quantity.oninput = () => {
+		checkQuantityLimit();
+	}
 
-    function checkQuantityLimit() {
-        let maxQuantity = 10; // Số lượng tối đa cho phép
-        if (quantity.value > maxQuantity) {
-            alert("Vượt quá giới hạn số lượng");
-            quantity.value = maxQuantity;
-        }
-    }
+	function checkQuantityLimit() {
+		let maxQuantity = 10; // Số lượng tối đa cho phép
+		if (quantity.value > maxQuantity) {
+			alert("Vượt quá giới hạn số lượng");
+			quantity.value = maxQuantity;
+		}
+	}
 </script>
 
 

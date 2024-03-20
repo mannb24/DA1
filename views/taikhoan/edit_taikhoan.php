@@ -1,10 +1,9 @@
-
 <style>
   body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    
+
   }
 
   .login-container {
@@ -61,8 +60,8 @@
     transition: 0.5s;
   }
 
-  .user-box input:focus ~ label,
-  .user-box input:valid ~ label {
+  .user-box input:focus~label,
+  .user-box input:valid~label {
     top: -20px;
     left: 0;
     color: #FF6633;
@@ -89,45 +88,44 @@
     color: #fff;
   }
 </style>
+
 <head>
 </head>
-    <div class="login-container">
-        <div class="login-box">
-            <h2>Cập nhât tài khoản</h2>
-            <?php
-                if(isset($_SESSION['user'])){
-                    $user = $_SESSION['user'];
-                }
-            ?>
-            <form action="index.php?act=edit_taikhoan" method="POST">
-            <div class="user-box">
-                <input type="text" name="user" required="" value="<?=$user['user']?>">
-                <label>Tên đăng nhập</label>
-            </div>
-            <div class="user-box">
-                <input type="email" name="email" required="" value="<?=$user['email']?>">
-                <label>Email</label>
-            </div>
-            <div class="user-box">
-                <input type="text" name="tel" required="" value="<?=$user['tel']?>">
-                <label>Số điện thoại</label>
-            </div>
-            <div class="user-box">
-                <input type="text" name="address" required="" value="<?=$user['address']?>">
-                <label>Đia chỉ</label>
-            </div>
-            <input type="hidden" name="id" value="<?=$user['id']?>">
-            <input class="btn-info"  type="submit" value="Cập nhật" name="capnhat">
-            </form>
-            <h2 class="thongbao">
-            <?php
+<div class="login-container">
+  <div class="login-box">
+    <h2>Cập nhât tài khoản</h2>
+    <?php
+    if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+    }
+    ?>
+    <form action="index.php?act=edit_taikhoan" method="POST">
+      <div class="user-box">
+        <input type="text" name="user" required="" value="<?= $user['taikhoan'] ?>">
+        <label>Tên đăng nhập</label>
+      </div>
+      <div class="user-box">
+        <input type="email" name="email" required="" value="<?= $user['Email'] ?>">
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="tel" required="" value="<?= $user['SoDienThoai'] ?>">
+        <label>Số điện thoại</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="address" required="" value="<?= $user['DiaChi'] ?>">
+        <label>Đia chỉ</label>
+      </div>
+      <input type="hidden" name="id" value="<?= $user['IDNguoi'] ?>">
+      <input class="btn-info" type="submit" value="Cập nhật" name="capnhat">
+    </form>
+    <h2 class="thongbao">
+      <?php
 
-                if(isset($thongbao)&&($thongbao!="")){
-                    echo $thongbao;
-                }
-            ?>
-            </h2>
-        </div>
-    </div>
-    
-
+      if (isset($thongbao) && ($thongbao != "")) {
+        echo $thongbao;
+      }
+      ?>
+    </h2>
+  </div>
+</div>

@@ -43,13 +43,13 @@ function load_ten_dm($iddm)
 
 function loadone_sanpham($id)
 {
-    $sql = "SELECT * from sanpham where IDSanPham=" . $id;
+    $sql = "SELECT * from sanpham where IDSanPham = " . $id;
     $sp = pdo_query_one($sql);
     return $sp;
 }
 function load_sanphamcungloai($id, $iddm)
 {
-    $sql = "select * from sanpham where IDDanhMuc=" . $iddm . " AND IDSanPham <>" . $id;
+    $sql = "SELECT * from sanpham where IDDanhMuc= " . $iddm . " AND IDSanPham != " . $id;
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

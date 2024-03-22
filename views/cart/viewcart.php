@@ -24,7 +24,7 @@
 
                         <?php $tong = 0;
                         $i = 0; ?>
-                        <?php foreach ($_SESSION['mycart'] as $cart) : ?>
+                        <?php foreach ($_SESSION['mycart'] as $cart): ?>
                             <?php
                             $tong += $cart[3] * $cart[4];
                             ?>
@@ -39,25 +39,34 @@
                                 <td class="cart_product_desc">
 
 
-                                    <h5><?= $cart[1] ?></h5>
+                                    <h5>
+                                        <?= $cart[1] ?>
+                                    </h5>
                                 </td>
                                 <td class="price">
-                                    <span><?= number_format($cart[3]) ?> đ</span>
+                                    <span>
+                                        <?= number_format($cart[3]) ?> đ
+                                    </span>
                                 </td>
                                 <td class="price">
                                     <form action="index.php?act=updatecart&id=<?= $cart[0] ?>" method="post">
-                                        <input style="margin: 15px 0px;width: 30px" type="hidden" name="id" value=<?= $cart[0] ?>>
+                                        <input style="margin: 15px 0px;width: 30px" type="hidden" name="id"
+                                            value=<?= $cart[0] ?>>
                                         <div style="display:flex;">
-                                        <input style="margin: 0px 10px ;width: 30px;text-align:center;" type="text" class="quantity" name="soluong" value="<?= $cart[4] ?>"><br>
+                                            <input style="margin: 0px 10px ;width: 30px;text-align:center;" type="text"
+                                                class="quantity" name="soluong" value="<?= $cart[4] ?>"><br>
 
-                                            <input style="padding :0px 8px; height:30px;" class="btn-info" type="submit" name="updatecart" value="Cập nhật">
+                                            <input style="padding :0px 8px; height:30px;" class="btn-info" type="submit"
+                                                name="updatecart" value="Cập nhật">
 
                                         </div>
                                     </form>
 
                                 </td>
                                 <td class="price">
-                                    <span><?= number_format($cart[3] * $cart[4]) ?> đ</span>
+                                    <span>
+                                        <?= number_format($cart[3] * $cart[4]) ?> đ
+                                    </span>
                                 </td>
                                 <td>
                                     <?= $cart[6] ?>
@@ -73,14 +82,19 @@
                         <?php endforeach; ?>
 
                         <td colspan="4"><b>Tổng thanh toán :</b></td>
-                        <td><b><?= number_format($tong) ?></b>đ</td>
+                        <td><b>
+                                <?= number_format($tong) ?>
+                            </b>đ</td>
 
                     </tbody>
                 </table>
             </div>
             <div class="input">
-                <a href="index.php?act=bill"><input class="btn-success" style="padding: 10px; font-size: 20px; margin-right: 8px;background-color: red;" type="button" value="Đặt hàng"></a>
-                <a href="index.php?act=mybill"><input class="btn-info" style="padding: 10px; font-size: 20px;" type="button" value="Đơn hàng của tôi"></a>
+                <a href="index.php?act=bill"><input class="btn-success"
+                        style="padding: 10px; font-size: 20px; margin-right: 8px;background-color: red;" type="button"
+                        value="Đặt hàng"></a>
+                <a href="index.php?act=mybill"><input class="btn-info" style="padding: 10px; font-size: 20px;"
+                        type="button" value="Đơn hàng của tôi"></a>
             </div>
         </div>
     </div>

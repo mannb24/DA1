@@ -151,12 +151,12 @@
 					<?= number_format($onesp['Gia']) ?> $
 				</div>
 				<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-					<span>SL :</span>
+					<!-- <span>SL :</span>
 					<div class="quantity_selector">
 						<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
 						<span id="quantity_value">1</span>
 						<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-					</div>
+					</div> -->
 
 					<form action="index.php?act=addtocart" method="post">
 						<!-- ... (previous input fields remain unchanged) ... -->
@@ -176,9 +176,15 @@
 										id="quantity" name="soluong" value=1><br>
 									<span class="plus">
 										<div class="buttontang btn-secondary"><i class="fa fa-plus"
-												aria-hidden="true"></i></div>
+												aria-hidden="true"></i>
+										</div>
 									</span>
 								</div>
+							</div>
+						</div>
+						<br>
+						<input type="submit" value="Thêm vào giỏ hàng">
+						<button style="border: 1px solid black;">Mua hàng ngay</button>
 					</form>
 				</div>
 			</div>

@@ -29,9 +29,9 @@ function loadone_bill($id)
     $bill = pdo_query_one($sql);
     return $bill;
 }
-function load_cart($idbill)
+function load_cart($iduser)
 {
-    $sql = "select * from giohang where IDNguoi =" . $idbill;
+    $sql = "select * from giohang where IDNguoi =" . $iduser;
     $cart = pdo_query($sql);
     return $cart;
 }

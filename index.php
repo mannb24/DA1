@@ -7,27 +7,28 @@ include "./model/taikhoan.php";
 include "./model/cart.php";
 include "./views/header.php";
 
-if (!isset($_SESSION['mycart']))
+
+if (!isset ($_SESSION['mycart']))
     $_SESSION['mycart'] = [];
 
 $spnew = loadall_sanpham_trangchu();
 $dmsp = loadall_danhmuc();
-if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
+if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
     switch ($act) {
         case 'categories':
-            if (isset($_POST['kyw']) && ($_POST['kyw'] != "")) {
+            if (isset ($_POST['kyw']) && ($_POST['kyw'] != "")) {
                 $kyw = $_POST['kyw'];
             } else {
                 $kyw = "";
             }
 
-            if (isset($_GET['iddm']) && ($_GET['iddm'] > 0)) {
+            if (isset ($_GET['iddm']) && ($_GET['iddm'] > 0)) {
                 $iddm = $_GET['iddm'];
             } else {
                 $iddm = 0;
             }
-            $dssp = loadall_sanpham($kyw, $iddm);
+            $dssp = loadall_sanpham($kyw, $currentpage, $iddm);
             $tendm = load_ten_dm($iddm);
             include "./views/categories.php";
             break;
@@ -35,7 +36,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "./views/post.php";
             break;
         case 'ctsp':
-            if ((isset($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
+            if ((isset ($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
                 extract($onesp);
@@ -45,46 +46,46 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 include "./views/home.php";
             }
             break;
-            case 'dangky':
-                if (isset($_POST['dangky']) && ($_POST['dangky'])) {
-                    $user = $_POST['user'];
-                    $pass = $_POST['pass'];
-                    $email = $_POST['email'];
-                    $address = $_POST['address'];
-                    $tel = $_POST['tel'];
-                    $errors = [];
-            
-                    if (empty($user)) {
-                        $errors['user'] = "Vui lòng nhập tên người dùng";
-                    }
-            
-                    if (empty($pass)) {
-                        $errors['pass'] = "Vui lòng nhập mật khẩu";
-                    }
-            
-                    if (empty($email)) {
-                        $errors['email'] = "Vui lòng nhập địa chỉ email";
-                    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $errors['email'] = "Địa chỉ email không hợp lệ";
-                    }
-            
-                    if (empty($address)) {
-                        $errors['address'] = "Vui lòng nhập địa chỉ";
-                    }
-            
-                    if (empty($tel)) {
-                        $errors['tel'] = "Vui lòng nhập số điện thoại";
-                    }
-            
-                    if (empty($errors)) {
-                        insert_taikhoan($user, $pass, $email, $address, $tel);
-                        $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
-                    }
+        case 'dangky':
+            if (isset ($_POST['dangky']) && ($_POST['dangky'])) {
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                $email = $_POST['email'];
+                $address = $_POST['address'];
+                $tel = $_POST['tel'];
+                $errors = [];
+
+                if (empty ($user)) {
+                    $errors['user'] = "Vui lòng nhập tên người dùng";
                 }
-                include "./views/taikhoan/dangky.php";
-                break;
+
+                if (empty ($pass)) {
+                    $errors['pass'] = "Vui lòng nhập mật khẩu";
+                }
+
+                if (empty ($email)) {
+                    $errors['email'] = "Vui lòng nhập địa chỉ email";
+                } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $errors['email'] = "Địa chỉ email không hợp lệ";
+                }
+
+                if (empty ($address)) {
+                    $errors['address'] = "Vui lòng nhập địa chỉ";
+                }
+
+                if (empty ($tel)) {
+                    $errors['tel'] = "Vui lòng nhập số điện thoại";
+                }
+
+                if (empty ($errors)) {
+                    insert_taikhoan($user, $pass, $email, $address, $tel);
+                    $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
+                }
+            }
+            include "./views/taikhoan/dangky.php";
+            break;
         case 'dangnhap':
-            if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
+            if (isset ($_POST['dangnhap']) && ($_POST['dangnhap'])) {
                 $user = $_POST['taikhoan'];
                 $pass = $_POST['matkhau'];
                 $checkuser = checkuser($user, $pass);
@@ -110,7 +111,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "views/taikhoan/dangnhap.php";
             break;
         case 'edit_taikhoan':
-            if (isset($_POST['capnhat'])) {
+            if (isset ($_POST['capnhat'])) {
                 $user = trim($_POST['user']);
                 $email = trim($_POST['email']);
                 $address = trim($_POST['address']);
@@ -125,7 +126,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             include "views/taikhoan/edit_taikhoan.php";
             break;
         case 'quenmk':
-            if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
+            if (isset ($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];
 
                 $checkemail = checkemail($email);
@@ -147,7 +148,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'addtocart':
             // Kiểm tra trùng lặp và thêm sản phẩm vào giỏ hàng
-            if (isset($_POST['addtocart'])) {
+            if (isset ($_SESSION['user'])) {
+                $iduser = $_SESSION['user'];
+            } else {
+                $thongbao = "Bạn cần đăng nhập để thực hiện chức năng này!";
+            }
+            $ltcart = load_cart($iduser);
+
+            if (isset ($_POST['addtocart'])) {
                 $id = $_POST['id'];
                 $name = $_POST['name'];
                 $img = $_POST['img'];
@@ -159,11 +167,11 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
                 // Kiểm tra trùng lặp theo ID sản phẩm
                 $productExists = false;
-                foreach ($_SESSION['mycart'] as $key => $cart) {
-                    if ($cart[0] == $id && $cart[6] == $size) {
+                foreach ($ltcart as $cart) {
+                    if ($cart['IDGioHang'] == $id) {
                         $productExists = true;
                         // Cập nhật số lượng nếu sản phẩm đã tồn tại
-                        $_SESSION['mycart'][$key][4] += $soluong;
+                        $ltcart[$key][4] += $soluong;
                         break;
                     }
                 }
@@ -173,10 +181,11 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     $_SESSION['mycart'][] = $spadd;
                 }
             }
+
             include "./views/cart/viewcart.php";
             break;
         case 'updatecart':
-            if (isset($_POST["updatecart"])) {
+            if (isset ($_POST["updatecart"])) {
                 $fl = 0;
                 $updatedQuantity = intval($_POST['soluong']);
 
@@ -199,7 +208,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
 
         case 'deletecart':
-            if (isset($_GET['idcart'])) {
+            if (isset ($_GET['idcart'])) {
                 array_splice($_SESSION['mycart'], $_GET['idcart'], 1);
             } else {
                 $_SESSION['mycart'] = [];
@@ -232,8 +241,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
             break;
         case 'billcomfirm':
-            if (isset($_POST['dongydathang']) && ($_POST['dongydathang'])) {
-                if (isset($_SESSION['user']))
+            if (isset ($_POST['dongydathang']) && ($_POST['dongydathang'])) {
+                if (isset ($_SESSION['user']))
                     $iduser = $_SESSION['user']['id'];
                 else
                     $iduser = 0;
@@ -256,15 +265,15 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             $listbill = loadall_bill($_SESSION['user']['id']);
             include "./views/cart/mybill.php";
             break;
-        case 'categories&iddm':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-            }
-            $dssp = loadall_sanpham($kyw, $id);
-            include "./views/categories.php";
-            break;
+        // case 'categories':
+        //     if (isset ($_GET['iddm'])) {
+        //         $iddm = $_GET['iddm'];
+        //     }
+        //     $dssp = loadall_sanpham($kyw, $currentpage, $iddm);
+        //     include "./views/categories.php";
+        //     break;
         case 'ctdh':
-            if (isset($_GET['id'])) {
+            if (isset ($_GET['id'])) {
                 $id = $_GET['id'];
                 $iduser = $_GET['iduser'];
             }
@@ -273,6 +282,15 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             $bill = loadone_bill($id);
             include "./views/cart/chitietdonhang.php";
             break;
+        // case 'star':
+        //     if (isset ($_GET['id'])) {
+        //         $id = $_GET['id'];
+        //     }
+        //     $taikhoan = loadone_taikhoan($iduser);
+        //     $cart = loadcart_cthoadon($id);
+        //     $bill = loadone_bill($id);
+        //     include "./views/cart/chitietdonhang.php";
+        //     break;
         default:
             include "./views/home.php";
             break;
@@ -281,3 +299,5 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     include "./views/home.php";
 }
 include "./views/footer.php";
+
+?>

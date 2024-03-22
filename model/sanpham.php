@@ -16,16 +16,23 @@ function loadall_sanpham_trangchu()
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
-function loadall_sanpham($kyw = "", $iddm = 0)
+function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
 {
-    $sql = "select * from sanpham where 1";
+    $sql = "select * from sanpham where 1 ";
     if ($kyw != "") {
         $sql .= " and TenSanPham like '%" . $kyw . "%'";
     }
     if ($iddm > 0) {
         $sql .= " and IDDanhMuc= '" . $iddm . "'";
     }
-    $sql .= " order by IDSanPham desc";
+    $sql .= "order by IDSanPham desc";
+    $pagesize = 10;
+    if ($currentpage = 1) {
+        $sql .= " limit 0,$pagesize";
+    } else {
+        $currentpage = ($currentpage - 1) * $pagesize;
+        $sql .= " limit $currentpage,$pagesize";
+    }
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

@@ -65,4 +65,5 @@ function update_sanpham($id, $iddm, $tensp, $giasp, $mota, $hinh)
     }
     pdo_execute($sql);
 }
+
 ?>

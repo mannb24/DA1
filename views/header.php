@@ -134,9 +134,9 @@
                             <nav class="navbar">
                                 <ul class="navbar_menu">
                                     <li><a href="index.php">Trang chủ</a></li>
-                                    <li><a href="index.php?act=categories&iddm=40">Áo Nam</a></li>
-                                    <li><a href="index.php?act=categories&iddm=34">Quần Nam</a></li>
-                                    <li><a href="index.php?act=categories&iddm=33">Phụ Kiện</a></li>
+                                    <li><a href="index.php?act=categories&iddm=1">Áo Nam</a></li>
+                                    <li><a href="index.php?act=categories&iddm=3">Quần Nam</a></li>
+                                    <li><a href="index.php?act=categories&iddm=5">Phụ Kiện</a></li>
                                     <li><a href="#">Giới thiệu</a></li>
                                 </ul>
                                 <ul class="navbar_user">

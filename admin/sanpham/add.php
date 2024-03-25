@@ -24,46 +24,48 @@
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <form action="index.php?act=addsp" method="POST" enctype="multipart/form-data">
-                                            <div class="input">
-                                                Danh mục <br>
-                                                <select name="iddm">
-                                                    <?php
-                                                    foreach ($listdanhmuc as $danhmuc) {
-                                                        extract($danhmuc);
-                                                        echo '<option value="' . $IDDanhMuc . '">' . $TenDanhMuc . '</option>';
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="input">
-                                                Tên sản phẩm <br>
-                                                <input type="text" name="tensp">
-                                            </div>
-                                            <div class="input">
-                                                Giá <br>
-                                                <input type="text" name="giasp">
-                                            </div>
-                                            <div class="input ">
-                                                Hình ảnh <br>
-                                                <input type="file" name="hinh">
-                                            </div>
-                                            <div class="input">
-                                                Mô tả <br>
-                                                <textarea name="mota" id="" cols="30" rows="10"></textarea>
-                                            </div>
-                                            <div style="margin: 20px 0 0 15px;" class="">
-                                                <input class="btn-primary" type="submit" name="themmoi"
-                                                    value="THÊM MỚI">
-                                                <input class="btn-secondary" type="reset" value="NHẬP LẠI">
-                                                <a href="index.php?act=listsp"><input class="btn-success" type="button"
-                                                        value="Danh sách"></a>
-                                            </div>
-                                            <?php
-                                            if (isset($thongbao) && ($thongbao != ""))
-                                                echo $thongbao;
-                                            ?>
-                                        </form>
+                                    <form action="index.php?act=addsp" method="POST" enctype="multipart/form-data">
+                            <div class="input">
+                                Danh mục <br>
+                                <select name="iddm">
+                                    <?php
+                                    foreach ($listdanhmuc as $danhmuc) {
+                                        extract($danhmuc);
+                                        echo '<option value="' . $IDDanhMuc . '">' . $TenDanhMuc . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="input">
+                                Tên sản phẩm <br>
+                                <input type="text" name="tensp">
+                                <span class="error"><?php if(isset($errors['tensp'])) echo $errors['tensp']; ?></span>
+                            </div>
+                            <div class="input">
+                                Giá <br>
+                                <input type="text" name="giasp">
+                                <span class="error"><?php if(isset($errors['giasp'])) echo $errors['giasp']; ?></span>
+                            </div>
+                            <div class="input ">
+                                Hình ảnh <br>
+                                <input type="file" name="hinh">
+                                <span class="error"><?php if(isset($errors['hinh'])) echo $errors['hinh']; ?></span>
+                            </div>
+                            <div class="input">
+                                Mô tả <br>
+                                <textarea name="mota" id="" cols="30" rows="10"></textarea>
+                                <span class="error"><?php if(isset($errors['mota'])) echo $errors['mota']; ?></span>
+                            </div>
+                            <div style="margin: 20px 0 0 15px;" class="">
+                                <input class="btn-primary" type="submit" name="themmoi" value="THÊM MỚI">
+                                <input class="btn-secondary" type="reset" value="NHẬP LẠI">
+                                <a href="index.php?act=listsp"><input class="btn-success" type="button" value="Danh sách"></a>
+                            </div>
+                            <?php
+                            if (isset($thongbao) && ($thongbao != ""))
+                                echo $thongbao;
+                            ?>
+                        </form>
                                     </div>
                                 </div>
                             </div>

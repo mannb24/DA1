@@ -84,6 +84,7 @@
 </style>
 
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="views/styles/single_styles.css">
 	<link rel="stylesheet" type="text/css" href="views/styles/single_responsive.css">
 </head>
@@ -121,8 +122,7 @@
 					</div>
 					<div class="col-lg-11 image_col order-lg-2 order-1">
 						<div class="single_product_image">
-							<div class="single_product_image_background"
-								style="background-image:url(views/images/<?= $onesp['AnhBia'] ?>)"></div>
+							<div class="single_product_image_background" style="background-image:url(views/images/<?= $onesp['AnhBia'] ?>)"></div>
 						</div>
 					</div>
 				</div>
@@ -169,14 +169,11 @@
 								<span>Số lượng:</span>
 								<div class="quantity_selector">
 									<span class="minus">
-										<div class="buttongiam btn-secondary"><i class="fa fa-minus"
-												aria-hidden="true"></i></div>
+										<div class="buttongiam btn-secondary"><i class="fa fa-minus" aria-hidden="true"></i></div>
 									</span>
-									<input style="margin: 15px 0px;width: 30px;text-align:center;" type="text"
-										id="quantity" name="soluong" value=1><br>
+									<input style="margin: 15px 0px;width: 30px;text-align:center;" type="text" id="quantity" name="soluong" value=1><br>
 									<span class="plus">
-										<div class="buttontang btn-secondary"><i class="fa fa-plus"
-												aria-hidden="true"></i></div>
+										<div class="buttontang btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></div>
 									</span>
 								</div>
 					</form>
@@ -188,33 +185,18 @@
 </div>
 
 <!-- Tabs -->
+<div class="mt-4 ">
 
-<div class="tabs_section_container">
+	<iframe src="views/binhluan/binhluanform.php?IDSanPham=<?= $id ?>" frameborder="0" scrolling="no" width="100%" height="400px"  ></iframe>
 
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<div class="tabs_container">
-					<ul
-						class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-						<li class="tab active" data-active-tab="tab_1"><span>Sản phẩm cùng loại</span></li>
-
-						<li class="tab" data-active-tab="tab_3"><span>Bình luận</span></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-
+</div>
 				<!-- Tab Description -->
-
 				<div id="tab_1" class="tab_container active">
 					<div class="row">
 						<div class="col-xl-12 tab_title">
 							<h4>Sản phẩm cùng loại</h4>
 						</div>
-						<?php foreach ($sp_cung_loai as $sp): ?>
+						<?php foreach ($sp_cung_loai as $sp) : ?>
 							<div class="product-item men">
 								<div class="product discount product_filter">
 									<div class="product_image">
@@ -235,23 +217,28 @@
 										</div>
 									</div>
 								</div>
-								<div class="red_button add_to_cart_button"><a
-										href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
+								<div class="red_button add_to_cart_button"><a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
 							</div>
 						<?php endforeach; ?>
 					</div>
 				</div>
 
-				<div id="tab_3" class="tab_container">
-					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+				<!-- <div id="tab_3" class="tab_container">
+					<h1>hihi</h1>
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 					<script>
-						$(document).ready(function () {
+						$(document).ready(function() {
 							$("#binhluan").load("views/binhluan/binhluanform.php", {
-								$idpro: <?= $id ?>
+								IDSanPham: <?= $id ?>
 							});
+
 						});
 					</script>
-				</div>
+
+					<div class="row" id="binhluan">
+
+					</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -260,8 +247,6 @@
 </div>
 
 </div>
-
-<!-- Benefit -->
 
 <div class="benefit">
 	<div class="container">
@@ -305,51 +290,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- Newsletter -->
-<script>
-	let tang = document.querySelector(".buttontang");
-	let giam = document.querySelector(".buttongiam");
-	let quantity = document.querySelector("#quantity");
-
-	tang.onclick = () => {
-		quantity.value++;
-		checkQuantityLimit();
-	}
-
-	giam.onclick = () => {
-		quantity.value--;
-		if (quantity.value <= 0) {
-			quantity.value = 1;
-		}
-		checkQuantityLimit();
-	}
-
-	quantity.oninput = () => {
-		checkQuantityLimit();
-	}
-
-	function checkQuantityLimit() {
-		let maxQuantity = 10; // Số lượng tối đa cho phép
-		if (quantity.value > maxQuantity) {
-			alert("Vượt quá giới hạn số lượng");
-			quantity.value = maxQuantity;
-		}
-	}
-</script>
-
-
-<script>
-	let tang = document.querySelector(".buttontang");
-	let giam = document.querySelector(".buttongiam");
-	let quantity = document.querySelector("#quantity");
-	tang.onclick = () => {
-		quantity.value++;
-	}
-	giam.onclick = () => {
-		quantity.value--;
-		if (quantity.value <= 0) {
-			quantity.value = 1;
-		}
-	}
-</script>

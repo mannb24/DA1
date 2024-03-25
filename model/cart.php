@@ -11,16 +11,32 @@ function tongdonhang()
     return $tong;
 }
 
+function GetInfor_SpForCart($idGioHang)
+{
+    $sql = "SELECT * FROM giohang_sanpham g Join sanpham s on g.IDSanPham = s.IDSanPham where g.IDGioHang = $idGioHang";
+    return pdo_execute($sql);
+}
 function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)
 {
     $sql = "INSERT INTO hoadon(IDNguoi,pttt,ThoiGian,ThanhTien) values('$iduser','$pttt','$ngaydathang','$tongdonhang')";
     return pdo_execute_return_lastInsertID($sql);
 }
 
-function insert_cart($iduser, $idpro, $img, $name, $price, $soluong, $thanhtien, $idbill)
+function GetIDGioHangByUser($iduser)
 {
-    $sql = "INSERT INTO giohang(IDNguoi,IDSanPham,SoLuong,ThanhTien) values('$iduser','$idpro','$soluong','$thanhtien')";
+    $sql = "SELECT IDGioHang FROM giohang where IDNguoi = $iduser";
     return pdo_execute($sql);
+}
+
+function insert_cart($iduser, $idpro, $soluong, $thanhtien)
+{
+    $sql = "INSERT INTO giohang(IDNguoi) values('$iduser')";
+    pdo_execute($sql);
+
+    $IDGioHang = GetIDGioHangByUser($iduser);
+
+    $sql1 = "INSERT INTO giohang_sanpham(IDGioHang,IDSanPham,SoLuong,ThanhTien) values('$IDGioHang','$idpro','$soluong','$thanhtien')";
+    return pdo_execute($sql1);
 }
 
 function loadone_bill($id)
@@ -71,6 +87,17 @@ function update_bill($id, $bill_satus)
     $sql = "UPDATE hoadon set TrangThai=' " . $bill_satus . " 'where IDHoaDon=" . $id;
     pdo_execute($sql);
 }
+function update_SoLuong($iduser, $sl, $id)
+{
+    $idGioHang = GetIDGioHangByUser($iduser);
+    $sql = "UPDATE giohang_sanpham set SoLuong=' " . $sl . " 'where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
+    pdo_execute($sql);
+}
+function update_SoLuong_Now($sl, $id, $idGioHang)
+{
+    $sql = "UPDATE giohang_sanpham set SoLuong=' " . $sl . " 'where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
+    pdo_execute($sql);
+}
 function update_bill_thanhtoan($bill_thanhtoan, $bill_satus)
 {
     $sql = "UPDATE hoadon set TrangThaiThanhToan = 1 where TrangThai = 3";
@@ -79,6 +106,12 @@ function update_bill_thanhtoan($bill_thanhtoan, $bill_satus)
 function update_bill_chuathanhtoan($bill_thanhtoan, $bill_satus)
 {
     $sql = "UPDATE hoadon set TrangThaiThanhToan = 0 where TrangThai !=  3";
+    pdo_execute($sql);
+}
+
+function Delete_SP_ForCart($idGioHang, $id)
+{
+    $sql = "DELETE giohang_sanpham where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
     pdo_execute($sql);
 }
 

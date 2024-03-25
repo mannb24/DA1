@@ -136,7 +136,7 @@
             <p class="thongbao">
                 <?php
 
-                if (isset($thongbao) && ($thongbao != "")) {
+                if (isset ($thongbao) && ($thongbao != "")) {
                     echo $thongbao;
                 }
                 ?>

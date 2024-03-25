@@ -1,7 +1,14 @@
+<?php
+if ($thongbao != "") {
+    echo "alter('$thongbao')";
+}
+?>
 <div style="width: 80%; margin-top: 170px;" class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">ĐƠN HÀNG</h1>
+    <h1 class="h3 mb-2 text-gray-800">
+        ĐƠN HÀNG
+    </h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -24,37 +31,35 @@
 
                         <?php $tong = 0;
                         $i = 0; ?>
-                        <?php foreach ($_SESSION['mycart'] as $cart): ?>
+                        <?php foreach ($ltSp as $cart): ?>
                             <?php
-                            $tong += $cart[3] * $cart[4];
+                            $tong += $cart['ThanhTien'];
                             ?>
-
-
                             <tr>
                                 <td class="cart_product_img">
-
-
-                                    <img src="./views/images/<?= $cart[2] ?> " alt="" width="50px" height="auto">
+                                    <img src="./views/images/<?= $cart['AnhBia'] ?> " alt="" width="50px" height="auto">
                                 </td>
                                 <td class="cart_product_desc">
 
 
                                     <h5>
-                                        <?= $cart[1] ?>
+                                        <?= $cart["TenSanPham"] ?>
                                     </h5>
                                 </td>
                                 <td class="price">
                                     <span>
-                                        <?= number_format($cart[3]) ?> đ
+                                        <?= number_format($cart['Gia']) ?> đ
                                     </span>
                                 </td>
                                 <td class="price">
-                                    <form action="index.php?act=updatecart&id=<?= $cart[0] ?>" method="post">
+                                    <form action="index.php?act=updatecart&id=<?= $cart['IDSanPham'] ?>" method="post">
                                         <input style="margin: 15px 0px;width: 30px" type="hidden" name="id"
-                                            value=<?= $cart[0] ?>>
+                                            value=<?= $cart['IDSanPham'] ?>>
+                                        <input style="margin: 15px 0px;width: 30px" type="hidden" name="idCart"
+                                            value=<?= $cart['IDGioHang'] ?>>
                                         <div style="display:flex;">
                                             <input style="margin: 0px 10px ;width: 30px;text-align:center;" type="text"
-                                                class="quantity" name="soluong" value="<?= $cart[4] ?>"><br>
+                                                class="quantity" name="soluong" value="<?= $cart['SoLuong'] ?>"><br>
 
                                             <input style="padding :0px 8px; height:30px;" class="btn-info" type="submit"
                                                 name="updatecart" value="Cập nhật">
@@ -65,14 +70,15 @@
                                 </td>
                                 <td class="price">
                                     <span>
-                                        <?= number_format($cart[3] * $cart[4]) ?> đ
+                                        <?= number_format($cart["ThanhTien"]) ?> đ
                                     </span>
                                 </td>
                                 <td>
                                     <?= $cart[6] ?>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" onclick="confirmDelete(<?= $i ?>);">
+                                    <a href="javascript:void(0);"
+                                        onclick="confirmDelete($cart['IDGioHang'] , $cart['IDSanPham']);">
                                         <input class="btn-danger" type="button" value="Xóa">
                                     </a>
                                 </td>

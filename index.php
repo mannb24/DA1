@@ -147,39 +147,44 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             // include "./views/home.php";
             break;
         case 'addtocart':
+            $ltSp = [];
+            $thongbao = "";
             // Kiểm tra trùng lặp và thêm sản phẩm vào giỏ hàng
-            if (isset ($_SESSION['user'])) {
-                $iduser = $_SESSION['user'];
-            } else {
-                $thongbao = "Bạn cần đăng nhập để thực hiện chức năng này!";
-            }
-            $ltcart = load_cart($iduser);
+            if (isset ($_SESSION['IDNguoi'])) {
+                // $iduser = $_SESSION['user']['IDNguoi'];
+                $iduser = $_SESSION['IDNguoi'];
 
-            if (isset ($_POST['addtocart'])) {
-                $id = $_POST['id'];
-                $name = $_POST['name'];
-                $img = $_POST['img'];
-                $price = $_POST['price'];
-                $soluong = $_POST['soluong'];
-                $ttien = $soluong * $price;
-                $size = $_POST['size'];
-                $spadd = [$id, $name, $img, $price, $soluong, $ttien, $size];
+                $ltcart = load_cart($iduser);
+                $ltSp = GetInfor_SpForCart($ltcart['IDGioHang']);
 
-                // Kiểm tra trùng lặp theo ID sản phẩm
-                $productExists = false;
-                foreach ($ltcart as $cart) {
-                    if ($cart['IDGioHang'] == $id) {
-                        $productExists = true;
-                        // Cập nhật số lượng nếu sản phẩm đã tồn tại
-                        $ltcart[$key][4] += $soluong;
-                        break;
+                if (isset ($_POST['addtocart'])) {
+                    $id = $_POST['id'];
+                    $name = $_POST['name'];
+                    $img = $_POST['img'];
+                    $price = $_POST['price'];
+                    $soluong = $_POST['soluong'];
+                    $ttien = $soluong * $price;
+                    $size = $_POST['size'];
+
+                    // Kiểm tra trùng lặp theo ID sản phẩm
+                    $productExists = false;
+                    foreach ($ltcart as $cart) {
+                        if ($ltSp['IDGioHang'] == $id) {
+                            $productExists = true;
+                            // Cập nhật số lượng nếu sản phẩm đã tồn tại
+                            $sl = $ltSp['SoLuong'] + $soluong;
+                            update_SoLuong($iduser, $sl, $id);
+                            break;
+                        }
+                    }
+
+                    // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
+                    if (!$productExists) {
+                        insert_cart($iduser, $id, $soluong, $ttien);
                     }
                 }
-
-                // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
-                if (!$productExists) {
-                    $_SESSION['mycart'][] = $spadd;
-                }
+            } else {
+                $thongbao = "Bạn cần đăng nhập để thực hiện chức năng này!";
             }
 
             include "./views/cart/viewcart.php";
@@ -188,6 +193,8 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             if (isset ($_POST["updatecart"])) {
                 $fl = 0;
                 $updatedQuantity = intval($_POST['soluong']);
+                $id = intval($_POST['id']);
+                $idGioHang = intval($_POST['idCart']);
 
                 // Ensure the updated quantity is within the allowed range (1 to 15)
                 if ($updatedQuantity < 1) {
@@ -195,14 +202,9 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
                 } elseif ($updatedQuantity > 10) {
                     $updatedQuantity = 10;
                 }
+                update_SoLuong_Now($updatedQuantity, $id, $idGioHang);
 
-                for ($i = 0; $i < sizeof($_SESSION['mycart']); $i++) {
-                    if ($_SESSION['mycart'][$i][0] == $_GET["id"]) {
-                        $fl = 1;
-                        $_SESSION['mycart'][$i][4] = $updatedQuantity;
-                        break;
-                    }
-                }
+                $ltSp = GetInfor_SpForCart($idGioHang);
             }
             include "./views/cart/viewcart.php";
             break;

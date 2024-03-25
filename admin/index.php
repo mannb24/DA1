@@ -8,19 +8,22 @@ include "../model/thongke.php";
 include "header.php";
 
 //controller
-
 if (isset ($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
         case 'adddm':
-            //kiểm tra người dùng có click nút add không
             if (isset ($_POST['themmoi']) && ($_POST['themmoi'])) {
-                $tenloai = $_POST['tenloai'];
-                inser_danhmuc($tenloai);
-                $thongbao = "Thêm thành công";
+                if (isset ($_POST['tenloai']) && !empty ($_POST['tenloai'])) {
+                    $tenloai = $_POST['tenloai'];
+                    inser_danhmuc($tenloai);
+                    $thongbao = "Thêm thành công";
+                } else {
+                    echo "<script>alert('Vui lòng nhập tên loại danh mục!');</script>";
+                }
             }
             include "danhmuc/add.php";
             break;
+
         case 'lisdm':
             $listdanhmuc = loadall_danhmuc();
             include "danhmuc/list.php";
@@ -52,29 +55,39 @@ if (isset ($_GET['act'])) {
             $listdanhmuc = loadall_danhmuc();
             include "danhmuc/list.php";
             break;
-        /* Controler sản phẩm */
         case 'addsp':
-            // kiểm tra xem người dung có click vào nút add ko 
             if (isset ($_POST['themmoi']) && ($_POST['themmoi'])) {
-                $iddm = $_POST['iddm'];
-                $tensp = $_POST['tensp'];
-                $giasp = $_POST['giasp'];
-                $mota = $_POST['mota'];
-                $img = $_FILES['hinh']['name'];
-                $target_dir = "../views/images/";
-                $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
-                if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
-                    //
-                } else {
-                    //
-                }
+                if (
+                    isset ($_POST['iddm']) && !empty ($_POST['iddm']) &&
+                    isset ($_POST['tensp']) && !empty ($_POST['tensp']) &&
+                    isset ($_POST['giasp']) && !empty ($_POST['giasp']) &&
+                    isset ($_POST['mota']) && !empty ($_POST['mota']) &&
+                    isset ($_FILES['hinh']) && !empty ($_FILES['hinh']['name'])
+                ) {
+                    $iddm = $_POST['iddm'];
+                    $tensp = $_POST['tensp'];
+                    $giasp = $_POST['giasp'];
+                    $mota = $_POST['mota'];
+                    $img = $_FILES['hinh']['name'];
+                    $target_dir = "../views/images/";
+                    $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
+                    if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
+                        //
+                    } else {
+                        //
+                    }
 
-                inser_sanpham($tensp, $giasp, $img, $mota, $iddm);
-                $thongbao = "Thêm thành công";
+                    inser_sanpham($tensp, $giasp, $img, $mota, $iddm);
+                    $thongbao = "Thêm thành công";
+                } else {
+                    echo "<script>alert('Vui lòng điền đầy đủ thông tin sản phẩm và chọn hình ảnh!');</script>";
+                }
             }
             $listdanhmuc = loadall_danhmuc();
             include "sanpham/add.php";
             break;
+
+
         case 'listsp':
             if (isset ($_POST['listok']) && ($_POST['listok'])) {
                 $kyw = $_POST['kyw'];

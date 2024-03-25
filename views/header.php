@@ -44,10 +44,12 @@
     $dmsp = loadall_danhmuc();
     ?>
     <div class="error-container">
-        <?php if (isset($errors) && !empty($errors)) : ?>
+        <?php if (isset ($errors) && !empty ($errors)): ?>
             <div class="error-message">
-                <?php foreach ($errors as $error) : ?>
-                    <p><?php echo $error; ?></p>
+                <?php foreach ($errors as $error): ?>
+                    <p>
+                        <?php echo $error; ?>
+                    </p>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -72,7 +74,7 @@
 
                                     <!-- Currency / Language / My Account -->
                                     <?php
-                                    if (isset($_SESSION['user'])) {
+                                    if (isset ($_SESSION['user'])) {
                                         $user = $_SESSION['user'];
                                         ?>
                                         <li class="account">
@@ -134,9 +136,9 @@
                             <nav class="navbar">
                                 <ul class="navbar_menu">
                                     <li><a href="index.php">Trang chủ</a></li>
-                                    <li><a href="index.php?act=categories&iddm=40">Áo Nam</a></li>
-                                    <li><a href="index.php?act=categories&iddm=34">Quần Nam</a></li>
-                                    <li><a href="index.php?act=categories&iddm=33">Phụ Kiện</a></li>
+                                    <li><a href="index.php?act=categories&iddm=1">Áo Nam</a></li>
+                                    <li><a href="index.php?act=categories&iddm=3">Quần Nam</a></li>
+                                    <li><a href="index.php?act=categories&iddm=5">Phụ Kiện</a></li>
                                     <li><a href="#">Giới thiệu</a></li>
                                 </ul>
                                 <ul class="navbar_user">

@@ -116,12 +116,13 @@
             <h2> Đăng nhập </h2>
             <form action="index.php?act=dangnhap" method="POST">
                 <div class="input-box">
-                    <input type="text" name="taikhoan" class="input" placeholder="Enter username" autocomplete="off"
-                        required>
+                    <input type="text" name="taikhoan" class="input" placeholder="Enter username" autocomplete="off">
+                    <div class="error-message" style="color: red;">
+                        <?php echo isset($thongbao) ? $thongbao : ''; ?>
+                    </div>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="matkhau" class="input" placeholder="Enter your password"
-                        autocomplete="off" required>
+                    <input type="password" name="matkhau" class="input" placeholder="Enter your password" autocomplete="off">
                 </div>
                 <div class="remember-forgot">
                     <label> <input type="checkbox"> Nhớ</label>
@@ -133,14 +134,14 @@
                     <a href="index.php?act=dangky"> Đăng ký tài khoản</a>
                 </div>
             </form>
-            <p class="thongbao">
+            <!-- <p class="thongbao">
                 <?php
 
                 if (isset ($thongbao) && ($thongbao != "")) {
                     echo $thongbao;
                 }
                 ?>
-            </p>
+            </p> -->
         </div>
     </section>
 </body>

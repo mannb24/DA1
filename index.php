@@ -88,26 +88,36 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             if (isset ($_POST['dangnhap']) && ($_POST['dangnhap'])) {
                 $user = $_POST['taikhoan'];
                 $pass = $_POST['matkhau'];
-                $checkuser = checkuser($user, $pass);
-                if (is_array($checkuser)) {
-                    $_SESSION['user'] = $checkuser;
 
-                    // Kiểm tra vai trò
-                    if ($checkuser['Role'] == 1) {
-                        // Nếu vai trò là 1 (admin), chuyển hướng đến trang quản trị admin
-                        echo "<script>
+                // Validate input fields
+                if (empty ($user) || empty ($pass)) {
+                    $thongbao = "Vui lòng điền đầy đủ thông tin đăng nhập.";
+                } else {
+                    // Proceed with user authentication
+                    $checkuser = checkuser($user, $pass);
+                    if (is_array($checkuser)) {
+                        // User credentials are valid
+                        $_SESSION['user'] = $checkuser;
+
+                        // Check user role
+                        if ($checkuser['Role'] == 1) {
+                            // If role is 1 (admin), redirect to admin dashboard
+                            echo "<script>
                                     window.location.href='admin/index.php';
                                 </script>";
-                    } else {
-                        // Nếu vai trò là người dùng thông thường, chuyển hướng đến trang chính
-                        echo "<script>
+                        } else {
+                            // If role is a regular user, redirect to main page
+                            echo "<script>
                                     window.location.href='index.php';
                                 </script>";
+                        }
+                    } else {
+                        // Invalid user credentials
+                        $thongbao = "Tài khoản không tồn tại";
                     }
-                } else {
-                    $thongbao = "Tài khoản không tồn tại";
                 }
             }
+
             include "views/taikhoan/dangnhap.php";
             break;
         case 'edit_taikhoan':
@@ -301,5 +311,6 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
     include "./views/home.php";
 }
 include "./views/footer.php";
+
 
 ?>

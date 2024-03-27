@@ -66,17 +66,18 @@
                     <div class="col-12 col-lg-10">
                         <div class="checkout_details_area mt-50 clearfix">
                             <div class="cart-title">
-                                <h2>Thông tin đặt hàng</h2>
+                                <h2>Thông tin đặt hàng
+                                </h2>
                             </div>
 
                             <?php
 
-                            if (isset($_SESSION['user']) && ($_SESSION['user'] != 0)) {
-                                extract($taikhoan);
-                                $name = $taikhoan['user'];
-                                $email = $taikhoan['email'];
-                                $tel = $taikhoan['tel'];
-                                $address = $taikhoan['address'];
+                            if (isset ($_SESSION['user']) && ($_SESSION['user'] != 0)) {
+                                $name = $taikhoan['Ten'];
+                                $email = $taikhoan['Email'];
+                                $tel = $taikhoan['SoDienThoai'];
+                                $address = $taikhoan['DiaChi'];
+                                $gioiTinh = $taikhoan['GioiTinh'];
                             } else {
                             }
 
@@ -84,22 +85,39 @@
 
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    <input type="text" class="form-control" id="company" placeholder="Tên khách hàng" name="name" value="<?= $name ?>" required="">
+                                    <label for="">Tên khách hàng</label>
+                                    <input type="text" class="form-control" id="company" name="name"
+                                        value="<?= $name ?>" required="">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<?= $email ?>" required="">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        value="<?= $email ?>" required="">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <input type="text" class="form-control" id="text" placeholder="Số Điện Thoại" name="tel" value="<?= $tel ?>" required="">
+                                    <label for="">Số Điện Thoại</label>
+                                    <input type="text" class="form-control" id="text" name="tel" value="<?= $tel ?>"
+                                        required="">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <input type="text" class="form-control mb-3" id="street_address" placeholder="Địa chỉ" name="address" value="<?= $address ?>" required="">
+                                    <label for="">Địa chỉ</label>
+                                    <input type="text" class="form-control mb-3" id="street_address" placeholder=""
+                                        name="address" value="<?= $address ?>" required="">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="">Giới tính</label>
+                                    <input type="text" class="form-control mb-3" id="street_address" placeholder=""
+                                        name="gioiTinh" value="<?= $gioiTinh ?>" required="">
                                 </div>
                                 <div class="radio" class="col-12 mb-3">
                                     <label for="">Phương thức thanh toán: </label>
-                                    <label for=""><input type="radio" name="pttt" id="" value="1" required="" checked>Thanh toán khi nhận
-                                        hàng</label>
-                                    </select>
+                                    <label for="">
+                                        <input type="radio" name="pttt" id="" value="1" required="" checked>Thanh toán
+                                        khi nhận hàng
+                                        <br>
+                                        <input type="radio" name="pttt" id="" value="2" required="" checked>Thanh toán
+                                        qua ngân hàng
+                                    </label>
                                 </div>
                             </div>
 
@@ -120,30 +138,37 @@
                                 <tbody>
                                     <?php $tong = 0;
                                     ?>
-                                    <?php foreach ($_SESSION['mycart'] as $cart) : ?>
-                                        <?php $ttien = $cart[3] * $cart[4];
-                                        $tong += $ttien;
-
+                                    <?php foreach ($ltSp as $cart): ?>
+                                        <?php
+                                        $tong += $cart['ThanhTien'];
                                         ?>
 
                                         <tr>
                                             <td class="cart_product_img">
-                                                <img src="./views/images/<?= $cart[2] ?> " alt="">
+                                                <img src="./views/images/<?= $cart['AnhBia'] ?> " alt="">
                                             </td>
                                             <td class="cart_product_desc">
-                                                <h5><?= $cart[1] ?></h5>
+                                                <h5>
+                                                    <?= $cart['TenSanPham'] ?>
+                                                </h5>
                                             </td>
                                             <td class="price">
-                                                <span><?= number_format($cart[3]) ?> đ</span>
+                                                <span>
+                                                    <?= number_format($cart['Gia']) ?> đ
+                                                </span>
                                             </td>
                                             <td class="price">
-                                                <span><?= $cart[4] ?></span>
+                                                <span>
+                                                    <?= $cart['SoLuong'] ?>
+                                                </span>
                                             </td>
                                             <td>
-                                                <?= $cart[6] ?>
+                                                <?= $cart['SoLuong'] ?>
                                             </td>
                                             <td class="price">
-                                                <span><?= number_format($ttien) ?> đ</span>
+                                                <span>
+                                                    <?= number_format($cart['ThanhTien']) ?> đ
+                                                </span>
                                             </td>
 
                                         </tr>
@@ -156,17 +181,21 @@
                             </table>
                         </div>
 
-                        <div class="col-12 col-lg-10">
-                            <div class="cart-summary">
-                                <h5>Tổng Thanh Toán : <?= number_format($tong) ?> đ</h5>
-                                <h5>Miễn phí vận chuyển</h5>
-                                <div class="cart-btn mt-100">
-                                    <input style="margin: 10px 10px; font-size: 18px; padding:4px;background-color: red;" type="submit" class="btn-primary" name="dongydathang" value="Đồng ý đặt hàng">
-                                </div>
 
-                            </div>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10">
+                <div class="cart-summary">
+                    <h5>Tổng Thanh Toán :
+                        <?= number_format($tong) ?> đ
+                    </h5>
+                    <h5>Miễn phí vận chuyển</h5>
+                    <div class="cart-btn mt-100">
+                        <input style="margin: 10px 10px; font-size: 18px; padding:4px;background-color: red;"
+                            type="submit" class="btn-primary" name="dongydathang" value="Đồng ý đặt hàng">
+                    </div>
+
                 </div>
             </div>
         </div>

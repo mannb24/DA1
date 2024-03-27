@@ -210,8 +210,18 @@ if (isset ($_GET['act'])) {
                 }
             }
             echo "<script>
-                    window.location.href='index.php?act=listdh';
-                </script>";
+                        window.location.href='index.php?act=listdh';
+                    </script>";
+            // include "donhang/list.php";
+            break;
+        case 'suathanhtoan':
+            if (isset ($_GET['id'])) {
+                $id = $_GET['id'];
+                update_bill_thanhtoan($id);
+            }
+            echo "<script>
+                            window.location.href='index.php?act=listdh';
+                        </script>";
             // include "donhang/list.php";
             break;
         default:

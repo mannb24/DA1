@@ -1,48 +1,43 @@
 <?php
-function tongdonhang()
+function tongdonhang($iduser)
 {
-    $tong = 0;
-    foreach ($_SESSION['mycart'] as $cart) {
-        $ttien = $cart[3] * $cart[4];
-        $tong += $ttien;
 
+    $ltSp = GetInfor_SpForUserID($iduser);
+    $tong = 0;
+    foreach ($ltSp as $cart) {
+        $tong += $cart["ThanhTien"];
     }
 
     return $tong;
 }
 
-function GetInfor_SpForCart($idGioHang)
+function GetInfor_SpForUserID($UserID)
 {
-    $sql = "SELECT * FROM giohang_sanpham g Join sanpham s on g.IDSanPham = s.IDSanPham where g.IDGioHang = $idGioHang";
-    return pdo_execute($sql);
+    $sql = "SELECT g.IDGioHang,g.IDNguoi,g.SoLuong,g.ThanhTien,s.* FROM giohang g Join sanpham s on g.IDSanPham = s.IDSanPham where g.IDNguoi = " . $UserID;
+    return pdo_query($sql);
 }
 function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)
 {
-    $sql = "INSERT INTO hoadon(IDNguoi,pttt,ThoiGian,ThanhTien) values('$iduser','$pttt','$ngaydathang','$tongdonhang')";
+    $sql = "INSERT INTO hoadon(IDNguoi,pttt,ThoiGian,ThanhTien,TrangThai) values('$iduser','$pttt','$ngaydathang','$tongdonhang', 'Chờ xác nhận')";
     return pdo_execute_return_lastInsertID($sql);
-}
-
-function GetIDGioHangByUser($iduser)
-{
-    $sql = "SELECT IDGioHang FROM giohang where IDNguoi = $iduser";
-    return pdo_execute($sql);
 }
 
 function insert_cart($iduser, $idpro, $soluong, $thanhtien)
 {
-    $sql = "INSERT INTO giohang(IDNguoi) values('$iduser')";
-    pdo_execute($sql);
-
-    $IDGioHang = GetIDGioHangByUser($iduser);
-
-    $sql1 = "INSERT INTO giohang_sanpham(IDGioHang,IDSanPham,SoLuong,ThanhTien) values('$IDGioHang','$idpro','$soluong','$thanhtien')";
-    return pdo_execute($sql1);
+    $sql = "INSERT INTO giohang(IDNguoi,IDSanPham,SoLuong,ThanhTien) values('$iduser','$idpro','$soluong','$thanhtien')";
+    return pdo_execute($sql);
 }
 
 function loadone_bill($id)
 {
     $sql = "select * from hoadon where IDHoaDon =" . $id;
     $bill = pdo_query_one($sql);
+    return $bill;
+}
+function loadCT_bill($id)
+{
+    $sql = "select h.SoLuong,s.* from hoadon_sanpham h JOIN sanpham s on s.IDSanPham = h.IDSanPham where IDHoaDon =" . $id;
+    $bill = pdo_query($sql);
     return $bill;
 }
 function load_cart($iduser)
@@ -57,14 +52,19 @@ function load_cart_count($idbill)
     $cart = pdo_query($sql);
     return sizeof($cart);
 }
+function load_bill_count($idbill)
+{
+    $sql = "select COUNT(*) as total from hoadon where IDHoaDon =" . $idbill;
+    $cart = pdo_query($sql);
+    return sizeof($cart);
+}
 function loadall_bill_admin($kyw = "", $iduser = 0)
 {
-
     $sql = "select * from hoadon where 1";
     if ($iduser > 0)
         $sql .= " AND IDNguoi =" . $iduser;
     if ($kyw != "")
-        $sql .= " AND id like '%" . $kyw . "%'";
+        $sql .= " AND IDHoaDon like '%" . $kyw . "%'";
     $sql .= " order by IDHoaDon desc";
     $listbill = pdo_query($sql);
     return $listbill;
@@ -87,20 +87,19 @@ function update_bill($id, $bill_satus)
     $sql = "UPDATE hoadon set TrangThai=' " . $bill_satus . " 'where IDHoaDon=" . $id;
     pdo_execute($sql);
 }
-function update_SoLuong($iduser, $sl, $id)
+function update_SoLuong($idGioHang, $sl)
 {
-    $idGioHang = GetIDGioHangByUser($iduser);
-    $sql = "UPDATE giohang_sanpham set SoLuong=' " . $sl . " 'where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
+    $sql = "UPDATE giohang set SoLuong=' " . $sl . " 'where IDGioHang=" . $idGioHang;
     pdo_execute($sql);
 }
-function update_SoLuong_Now($sl, $id, $idGioHang)
+function update_SoLuong_Now($sl, $ttien, $idGioHang)
 {
-    $sql = "UPDATE giohang_sanpham set SoLuong=' " . $sl . " 'where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
+    $sql = "UPDATE giohang set SoLuong= " . $sl . ", ThanhTien = " . $ttien . " Where IDGioHang=" . $idGioHang;
     pdo_execute($sql);
 }
-function update_bill_thanhtoan($bill_thanhtoan, $bill_satus)
+function update_bill_thanhtoan($idhd)
 {
-    $sql = "UPDATE hoadon set TrangThaiThanhToan = 1 where TrangThai = 3";
+    $sql = "UPDATE hoadon set TrangThaiThanhToan = 1 where IDHoaDon = " . $idhd;
     pdo_execute($sql);
 }
 function update_bill_chuathanhtoan($bill_thanhtoan, $bill_satus)
@@ -109,9 +108,19 @@ function update_bill_chuathanhtoan($bill_thanhtoan, $bill_satus)
     pdo_execute($sql);
 }
 
+function insert_bill_sp($idhoadon, $idsanpham, $SoLuong)
+{
+    $sql = "INSERT INTO hoadon_sanpham(IDHoaDon,IDSanPham, SoLuong) values('$idhoadon','$idsanpham',$SoLuong)";
+    return pdo_execute($sql);
+}
 function Delete_SP_ForCart($idGioHang, $id)
 {
-    $sql = "DELETE giohang_sanpham where IDGioHang=" . $idGioHang . " AND IDSanPham = " . $id;
+    $sql = "DELETE giohang where IDGioHang=" . $idGioHang;
+    pdo_execute($sql);
+}
+function Delete_All_SP_ForCart($iduser)
+{
+    $sql = "DELETE FROM giohang where IDNguoi = " . $iduser;
     pdo_execute($sql);
 }
 

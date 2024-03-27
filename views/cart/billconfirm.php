@@ -1,7 +1,7 @@
 <style>
     .cart-table-area {
-        margin-top: 200px;
-        margin-left: 210px;
+        margin-top: 100px;
+        /* margin-left: 110px; */
     }
 
     .cart-summary {
@@ -31,25 +31,17 @@
     table {
         width: 100%;
         text-align: center;
+        max-width: 100vw;
     }
 
     table img {
-        width: 50px;
+        width: 150px;
     }
 </style>
 
 
 <link rel="stylesheet" href="./styles/core-style.css">
 
-<?php
-if (isset($bill) && (is_array($bill))) {
-    extract($bill);
-}
-if (isset($taikhoan) && $taikhoan != 0) {
-    extract($taikhoan);
-}
-
-?>
 
 <body>
     <div class="cart-table-area section-padding-100">
@@ -61,14 +53,26 @@ if (isset($taikhoan) && $taikhoan != 0) {
                             <h2>Đặt hàng thành công !</h2>
                         </div>
                         <div>
-                            <?php $pttt = get_pttt($bill['bill_pttt']); ?>
+                            <?php $pttt = get_pttt($pttt); ?>
                             <h3>Thông tin khách hàng :</h3><br>
-                            <p>Người đặt hàng : <?= $taikhoan['user'] ?></p>
-                            <p>Số điện thoại : <?= $taikhoan['tel'] ?></p>
-                            <p>Địa chỉ : <?= $taikhoan['address'] ?></p>
-                            <p>email : <?= $taikhoan['email'] ?></p>
-                            <p>Phương thức thanh toán : <?= $pttt ?></p>
-                            <p>Ngày lập hóa đơn : <?= $bill['ngaydathang'] ?></p>
+                            <p>Người đặt hàng :
+                                <?= $taikhoan['Ten'] ?>
+                            </p>
+                            <p>Số điện thoại :
+                                <?= $taikhoan['SoDienThoai'] ?>
+                            </p>
+                            <p>Địa chỉ :
+                                <?= $taikhoan['DiaChi'] ?>
+                            </p>
+                            <p>email :
+                                <?= $taikhoan['Email'] ?>
+                            </p>
+                            <p>Phương thức thanh toán :
+                                <?= $pttt ?>
+                            </p>
+                            <p>Ngày lập hóa đơn :
+                                <?= $bill['ThoiGian'] ?>
+                            </p>
                         </div>
 
 
@@ -88,24 +92,26 @@ if (isset($taikhoan) && $taikhoan != 0) {
                             <tbody>
                                 <?php $tong = 0;
                                 ?>
-                                <?php foreach ($billct as $cart) : ?>
-                                    <?php
-                                    $tong += $cart['thanhtien'];
-
-                                    ?>
+                                <?php foreach ($billct as $c): ?>
 
                                     <tr>
                                         <td class="cart_product_img">
-                                            <img src="./views/images/<?= $cart['img'] ?> " alt="">
+                                            <img src="./views/images/<?= $c['AnhBia'] ?> ">
                                         </td>
                                         <td class="cart_product_desc">
-                                            <h5><?= $cart['name'] ?></h5>
+                                            <h5>
+                                                <?= $c['TenSanPham'] ?>
+                                            </h5>
                                         </td>
                                         <td class="price">
-                                            <span><?= number_format($cart['price']) ?> đ</span>
+                                            <span>
+                                                <?= number_format($c['Gia']) ?> đ
+                                            </span>
                                         </td>
                                         <td class="price">
-                                            <span><?= $cart["soluong"] ?></span>
+                                            <span>
+                                                <?= $c["SoLuong"] ?>
+                                            </span>
                                         </td>
                                     </tr>
 
@@ -116,7 +122,9 @@ if (isset($taikhoan) && $taikhoan != 0) {
                             </tbody>
                         </table>
                         <p class="tien" style="color: red;
-    font-size: 16px;">Tổng thanh toán : <?= number_format($bill['total']) ?> đ</p>
+                            font-size: 16px;">Tổng thanh toán :
+                            <?= number_format($bill['ThanhTien']) ?> đ
+                        </p>
                     </div>
                 </div>
 

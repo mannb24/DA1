@@ -185,7 +185,7 @@
 							</div>
 						</div>
 						<br>
-						<input type="submit" value="Thêm vào giỏ hàng">
+						<input type="submit" name="submit" value="Thêm vào giỏ hàng">
 						<button style="border: 1px solid black;">Mua hàng ngay</button>
 					</form>
 				</div>

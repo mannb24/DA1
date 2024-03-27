@@ -15,7 +15,7 @@ p{
     color: red;
 }   
         section {
-            padding-top: 100px;
+            padding-top: 250px;
             position: relative;
             width: 100%;
             height: 100vh;
@@ -165,6 +165,6 @@ p{
                 ?>
             </p>
         </div>
-    </section>
+    </section><br><br>
 </body>
 </html>

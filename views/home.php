@@ -1,6 +1,8 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="views/styles/main_styles.css">
 	<link rel="stylesheet" type="text/css" href="views/styles/responsive.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <div class="main_slider" style="background-image:url(./views/images/slider_5.jpg)">
@@ -25,7 +27,7 @@
 			<?php foreach ($dmsp as $dm): ?>
 
 				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(./views/images/banner_7.jpg)">
+					<div class="banner_item align-items-center" style="background-image:url(./views/images/banner1.jpg)">
 						<div class="banner_category">
 							<a href="index.php?act=categories&iddm=<?= $dm['IDDanhMuc'] ?>">
 								<?= $dm['TenDanhMuc'] ?>
@@ -51,40 +53,55 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-					<?php foreach ($spnew as $sp): ?>
+				<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }', style="position: relative; height: 135vh;">
+				
+				<?php foreach ($spnew as $sp): ?>
 
-						<div class="product-item men">
-							<div class="product discount product_filter">
-								<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>" class="product_image">
-									<img src="views/images/<?= $sp['AnhBia'] ?>" alt="" style="width: 100%; height:250px; ">
-								</a>
-								<div class="favorite favorite_left"></div>
-								<div class="product_info">
-									<h6 class="product_name">
-										<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
-											<?php
-											$productName = $sp['TenSanPham'];
-											echo strlen($productName) > 20 ? substr($productName, 0, 20) . " ..." : $productName;
-											?>
-										</a>
-									</h6>
-									<div class="product_price">
-										<?= number_format($sp['Gia']) ?> đ<span>
-											<?= number_format($sp['Gia'] * 110 / 100) ?> đ
-										</span>
-									</div>
-								</div>
-							</div>
-							<div class="red_button add_to_cart_button"><a
-									href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
-						</div>
+<div class="product-item men">
+	<div class="product discount product_filter">
+		<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>" class="product_image">
+			<img src="views/images/<?= $sp['AnhBia'] ?>" alt="" style="width: 100%; height:250px; ">
+		</a>
+		<div class="favorite favorite_left"></div>
+		<div class="product_info">
+			<h6 class="product_name">
+				<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
+					<?php
+					$productName = $sp['TenSanPham'];
+					echo strlen($productName) > 20 ? substr($productName, 0, 20) . " ..." : $productName;
+					?>
+				</a>
+			</h6>
+			<div class="product_price">
+				<?= number_format($sp['Gia']) ?> đ<span>
+					<?= number_format($sp['Gia'] * 110 / 100) ?> đ
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="red_button add_to_cart_button"><a
+			href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
+</div>
 
-					<?php endforeach; ?>
+<?php endforeach; ?>
+
+
+
 
 				</div>
 			</div>
+			
 		</div>
+		
+		<nav class="navbar">
+		<ul class="navbar_menu" id="page-links">
+			<li><a class="page-link" href="#"><<</a></li>
+            <li><a class="page-link" href="#">1</a></li>
+			<li><a class="page-link" href="#">2</a></li>
+			<li><a class="page-link" href="#">3</a></li>
+			<li><a class="page-link" href="#">>></a></li>
+		</ul>
+		</nav>
 	</div>
 </div>
 
@@ -94,7 +111,7 @@
 			<div class="col-lg-6">
 				<div
 					class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-					<h4>Uư đãi người mới</h4>
+					<h4>Ưu đãi người mới</h4>
 					<p>Đăng kí thành viên và được giảm giá 20% cho lần đầu mùa hàng</p>
 				</div>
 			</div>
@@ -113,3 +130,4 @@
 	</div>
 </div>
 </div>
+

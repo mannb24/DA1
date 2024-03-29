@@ -58,7 +58,7 @@
 
         <!-- Header -->
 
-        <header class="header trans_300">
+        <header style="max-height: 180px;" class="header trans_300">
 
             <!-- Top Navigation -->
 
@@ -126,7 +126,7 @@
 
             <!-- Main Navigation -->
 
-            <div class="main_nav_container">
+            <div style="height: 100px;" class="main_nav_container">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-right">
@@ -166,5 +166,5 @@
                     </div>
                 </div>
             </div>
-
         </header>
+        <div style="margin-bottom: 180px;"></div>

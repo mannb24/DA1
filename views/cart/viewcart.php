@@ -1,7 +1,14 @@
 <?php
 if ($thongbao != "") {
-    echo "alter('$thongbao')";
+    echo "<script>alert('Bạn cần đăng nhập để thực hiện chức năng này!');</script>";
+    $ltSp = [];
+} else {
+    if (isset ($_SESSION['user']['IDNguoi'])) {
+        $iduser = $_SESSION['user']['IDNguoi'];
+        $ltSp = GetInfor_SpForUserID($iduser);
+    }
 }
+
 ?>
 <div style="width: 80%; margin-top: 170px;" class="container-fluid">
 
@@ -9,7 +16,6 @@ if ($thongbao != "") {
     <h1 class="h3 mb-2 text-gray-800">
         ĐƠN HÀNG
     </h1>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body1">
@@ -29,8 +35,7 @@ if ($thongbao != "") {
                     </thead>
                     <tbody>
 
-                        <?php $tong = 0;
-                        $i = 0; ?>
+                        <?php $tong = 0; ?>
                         <?php foreach ($ltSp as $cart): ?>
                             <?php
                             $tong += $cart['ThanhTien'];
@@ -52,11 +57,11 @@ if ($thongbao != "") {
                                     </span>
                                 </td>
                                 <td class="price">
-                                    <form action="index.php?act=updatecart&id=<?= $cart['IDSanPham'] ?>" method="post">
-                                        <input style="margin: 15px 0px;width: 30px" type="hidden" name="id"
-                                            value=<?= $cart['IDSanPham'] ?>>
+                                    <form action="index.php?act=updatecart&id=<?= $cart['IDGioHang'] ?>" method="post">
                                         <input style="margin: 15px 0px;width: 30px" type="hidden" name="idCart"
                                             value=<?= $cart['IDGioHang'] ?>>
+                                        <input style="margin: 15px 0px;width: 30px" type="hidden" name="Gia"
+                                            value=<?= $cart['Gia'] ?>>
                                         <div style="display:flex;">
                                             <input style="margin: 0px 10px ;width: 30px;text-align:center;" type="text"
                                                 class="quantity" name="soluong" value="<?= $cart['SoLuong'] ?>"><br>
@@ -74,16 +79,14 @@ if ($thongbao != "") {
                                     </span>
                                 </td>
                                 <td>
-                                    <?= $cart[6] ?>
+                                    <?= $cart['ThanhTien'] ?>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);"
-                                        onclick="confirmDelete($cart['IDGioHang'] , $cart['IDSanPham']);">
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?= $cart['IDGioHang'] ?>)">
                                         <input class="btn-danger" type="button" value="Xóa">
                                     </a>
                                 </td>
                             </tr>
-                            <?php $i += 1; ?>
 
                         <?php endforeach; ?>
 

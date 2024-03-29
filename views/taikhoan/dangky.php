@@ -128,6 +128,12 @@ p{
                 <p class="error"><?php echo $errors['user']; ?></p>
             <?php endif; ?>
             <div class="input-box">
+                <input type="text" name="ten" class="input" placeholder="Enter name" autocomplete="off">
+            </div>
+            <?php if(isset($errors['ten'])): ?>
+                <p class="error"><?php echo $errors['ten']; ?></p>
+            <?php endif; ?>
+            <div class="input-box">
                 <input type="password" name="pass" class="input" placeholder="Enter your password" autocomplete="off">
             </div>
             <?php if(isset($errors['pass'])): ?>

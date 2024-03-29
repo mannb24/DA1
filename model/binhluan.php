@@ -5,7 +5,22 @@ function insert_bl($IDNguoi, $noidung, $sao, $ngayBinhLuan, $IDSanPham)
 
     pdo_execute($sql);
 }
-
+function loadall_bl_2($IDSanPham)
+{
+    $sql =  "SELECT BL.NoiDung, BL.NgayBinhLuan, U.Ten
+    FROM danhgia BL
+    INNER JOIN user U ON BL.IDNguoi = U.IDNguoi WHERE BL.IDSanPham = $IDSanPham limit 2";
+    $listbl=pdo_query($sql);
+    return  $listbl;
+}
+function loadall_bl($IDSanPham)
+{
+    $sql =  "SELECT BL.NoiDung, BL.NgayBinhLuan, U.Ten
+    FROM danhgia BL
+    INNER JOIN user U ON BL.IDNguoi = U.IDNguoi WHERE BL.IDSanPham = $IDSanPham";
+    $listbl=pdo_query($sql);
+    return  $listbl;
+}
 
 function delete_binhluan($id)
 {
@@ -19,6 +34,3 @@ function all_binhluan()
     $listbl = pdo_query($sql);
     return $listbl;
 }
-
-
-?>

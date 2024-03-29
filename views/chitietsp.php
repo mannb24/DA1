@@ -79,7 +79,9 @@
 		margin: 0 0 0 20px;
 		padding: 6px;
 	}
+	
 
+   
 	/* ... (previous styles remain unchanged) ... */
 </style>
 
@@ -196,12 +198,14 @@
 </div>
 
 <!-- Tabs -->
-<div class="mt-4 ">
-
-	<iframe src="views/binhluan/binhluanform.php?IDSanPham=<?= $id ?>" frameborder="0" scrolling="no" width="100%"
-		height="400px"></iframe>
+<div class="mt-4">
+    <iframe  src="views/binhluan/binhluanform.php?IDSanPham=<?= $id ?>" frameborder="0" scrolling="yes" width="100%" height="400px"></iframe>
 </div>
+
 <!-- Tab Description -->
+<div class="container">
+
+
 <div id="tab_1" class="tab_container active">
 	<div class="row">
 		<div class="col-xl-12 tab_title">
@@ -243,7 +247,7 @@
 </div>
 
 </div>
-
+</div>
 <div class="benefit">
 	<div class="container">
 		<div class="row benefit_row">

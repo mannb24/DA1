@@ -53,6 +53,9 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
                 $email = $_POST['email'];
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
+                $ten = $_POST['ten'];
+                
+
                 $errors = [];
 
                 if (empty ($user)) {
@@ -76,9 +79,13 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
                 if (empty ($tel)) {
                     $errors['tel'] = "Vui lòng nhập số điện thoại";
                 }
+                if (empty ($ten)) {
+                    $errors['ten'] = "Vui lòng nhập số tên";
+                }
+
 
                 if (empty ($errors)) {
-                    insert_taikhoan($user, $pass, $email, $address, $tel);
+                    insert_taikhoan($user, $pass, $email, $address, $tel,$ten);
                     $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
                 }
             }

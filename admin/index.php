@@ -200,13 +200,10 @@ if (isset ($_GET['act'])) {
         case 'updatedh':
             if (isset ($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $bill_satus = $_POST['bill_satus'];
-                $bill_thanhtoan = 0;
                 $id = $_POST['id'];
                 update_bill($id, $bill_satus);
                 if ($bill_satus == 3) {
-                    update_bill_thanhtoan($bill_thanhtoan, $bill_satus);
-                } else {
-                    update_bill_chuathanhtoan($bill_thanhtoan, $bill_satus);
+                    update_bill_thanhtoan($id);
                 }
             }
             echo "<script>

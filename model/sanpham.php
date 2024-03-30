@@ -10,9 +10,11 @@ function delete_sanpham($id)
     pdo_execute($sql);
 
 }
-function loadall_sanpham_trangchu()
+function loadall_sanpham_trangchu($currentpage = 1)
 {
-    $sql = "select * from sanpham where 1 order by Gia desc limit 15 ";
+    $pagesize = 10;
+    $currentpage = ($currentpage - 1) * $pagesize;
+    $sql = "select * from sanpham where 1 order by Gia desc limit $currentpage,$pagesize";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
@@ -27,7 +29,8 @@ function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
     }
     $sql .= "order by IDSanPham desc";
     $pagesize = 10;
-    if ($currentpage = 1) {
+    // echo "<script>console.log($currentpage)</script>";
+    if ($currentpage == 1) {
         $sql .= " limit 0,$pagesize";
     } else {
         $currentpage = ($currentpage - 1) * $pagesize;
@@ -42,7 +45,7 @@ function load_ten_dm($iddm)
         $sql = "select * from danhmuc where IDDanhMuc=" . $iddm;
         $dm = pdo_query_one($sql);
         extract($dm);
-        return $name;
+        // return $name;
     } else {
         return "";
     }

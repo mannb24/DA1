@@ -53,54 +53,57 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }', style="position: relative; height: 135vh;">
-				
-				<?php foreach ($spnew as $sp): ?>
+				<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }' ,
+					style="position: relative; height: 135vh;">
 
-<div class="product-item men">
-	<div class="product discount product_filter">
-		<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>" class="product_image">
-			<img src="views/images/<?= $sp['AnhBia'] ?>" alt="" style="width: 100%; height:250px; ">
-		</a>
-		<div class="favorite favorite_left"></div>
-		<div class="product_info">
-			<h6 class="product_name">
-				<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
-					<?php
-					$productName = $sp['TenSanPham'];
-					echo strlen($productName) > 20 ? substr($productName, 0, 20) . " ..." : $productName;
-					?>
-				</a>
-			</h6>
-			<div class="product_price">
-				<?= number_format($sp['Gia']) ?> đ<span>
-					<?= number_format($sp['Gia'] * 110 / 100) ?> đ
-				</span>
-			</div>
-		</div>
-	</div>
-	<div class="red_button add_to_cart_button"><a
-			href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
-</div>
+					<?php foreach ($spnew as $sp): ?>
 
-<?php endforeach; ?>
+						<div class="product-item men">
+							<div class="product discount product_filter">
+								<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>" class="product_image">
+									<img src="views/images/<?= $sp['AnhBia'] ?>" alt="" style="width: 100%; height:250px; ">
+								</a>
+								<div class="favorite favorite_left"></div>
+								<div class="product_info">
+									<h6 class="product_name">
+										<a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
+											<?php
+											$productName = $sp['TenSanPham'];
+											echo strlen($productName) > 20 ? substr($productName, 0, 20) . " ..." : $productName;
+											?>
+										</a>
+									</h6>
+									<div class="product_price">
+										<?= number_format($sp['Gia']) ?> đ<span>
+											<?= number_format($sp['Gia'] * 110 / 100) ?> đ
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="red_button add_to_cart_button"><a
+									href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a></div>
+						</div>
+
+					<?php endforeach; ?>
 
 
 
 
 				</div>
 			</div>
-			
+
 		</div>
-		
+
 		<nav class="navbar">
-		<ul class="navbar_menu" id="page-links">
-			<li><a class="page-link" href="#"><<</a></li>
-            <li><a class="page-link" href="#">1</a></li>
-			<li><a class="page-link" href="#">2</a></li>
-			<li><a class="page-link" href="#">3</a></li>
-			<li><a class="page-link" href="#">>></a></li>
-		</ul>
+			<ul class="navbar_menu" id="page-links">
+				<li><a class="page-link" href="#">
+						<< </a>
+				</li>
+				<li><a class="page-link" href="index.php?currentpage=1">1</a></li>
+				<li><a class="page-link" href="index.php?currentpage=2">2</a></li>
+				<li><a class="page-link" href="index.php?currentpage=3">3</a></li>
+				<li><a class="page-link" href="#">>></a></li>
+			</ul>
 		</nav>
 	</div>
 </div>
@@ -130,4 +133,3 @@
 	</div>
 </div>
 </div>
-

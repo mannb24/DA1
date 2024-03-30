@@ -7,6 +7,38 @@
     <title>Danh sách sản phẩm</title>
     <!-- Include any necessary stylesheets and scripts here -->
 </head>
+<style>
+    .navbar {
+        width: auto;
+        height: 100px;
+        float: right;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .navbar_menu li {
+        display: inline-block;
+    }
+
+    .navbar_menu li a {
+        display: block;
+        color: black;
+        background-color: white;
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: 20px;
+        -webkit-transition: color 0.3s ease;
+        -moz-transition: color 0.3s ease;
+        -ms-transition: color 0.3s ease;
+        -o-transition: color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+
+    .navbar_menu li a:hover {
+        color: #b5aec4;
+    }
+</style>
 
 <body>
 
@@ -78,6 +110,20 @@
                                                 ?>
                                             </tbody>
                                         </table>
+                                        <nav class="navbar d-flex">
+                                            <ul class=" navbar_menu" id="page-links">
+                                                <li><a class="page-link" href="#">
+                                                        << </a>
+                                                </li>
+                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=1">1</a>
+                                                </li>
+                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=2">2</a>
+                                                </li>
+                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=3">3</a>
+                                                </li>
+                                                <li><a class="page-link" href="#">>></a></li>
+                                            </ul>
+                                        </nav>
                                         <div class="input_button">
                                             <input onclick="selects()" class="btn-info" type="button"
                                                 value="Chọn tất cả">
@@ -97,7 +143,6 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         function confirmDelete(deleteUrl) {
             if (confirm("Bạn có muốn xóa không?")) {

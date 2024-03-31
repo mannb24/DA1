@@ -9,22 +9,25 @@ include "./model/bank.php";
 include "./views/header.php";
 
 
-if (!isset ($_SESSION['mycart']))
+if (!isset($_SESSION['mycart']))
     $_SESSION['mycart'] = [];
-
-$spnew = loadall_sanpham_trangchu();
+$currentpage = 1;
+if (isset($_GET['currentpage'])) {
+    $currentpage = $_GET['currentpage'];
+}
+$spnew = loadall_sanpham_trangchu($currentpage);
 $dmsp = loadall_danhmuc();
-if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
+if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
     switch ($act) {
         case 'categories':
-            if (isset ($_POST['kyw']) && ($_POST['kyw'] != "")) {
+            if (isset($_POST['kyw']) && ($_POST['kyw'] != "")) {
                 $kyw = $_POST['kyw'];
             } else {
                 $kyw = "";
             }
 
-            if (isset ($_GET['iddm']) && ($_GET['iddm'] > 0)) {
+            if (isset($_GET['iddm']) && ($_GET['iddm'] > 0)) {
                 $iddm = $_GET['iddm'];
             } else {
                 $iddm = 0;
@@ -37,7 +40,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             include "./views/post.php";
             break;
         case 'ctsp':
-            if ((isset ($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
+            if ((isset($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
                 extract($onesp);
@@ -48,57 +51,57 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             }
             break;
         case 'dangky':
-            if (isset ($_POST['dangky']) && ($_POST['dangky'])) {
+            if (isset($_POST['dangky']) && ($_POST['dangky'])) {
                 $user = $_POST['user'];
                 $pass = $_POST['pass'];
                 $email = $_POST['email'];
                 $address = $_POST['address'];
                 $tel = $_POST['tel'];
                 $ten = $_POST['ten'];
-                
+
 
                 $errors = [];
 
-                if (empty ($user)) {
+                if (empty($user)) {
                     $errors['user'] = "Vui lòng nhập tên người dùng";
                 }
 
-                if (empty ($pass)) {
+                if (empty($pass)) {
                     $errors['pass'] = "Vui lòng nhập mật khẩu";
                 }
 
-                if (empty ($email)) {
+                if (empty($email)) {
                     $errors['email'] = "Vui lòng nhập địa chỉ email";
                 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors['email'] = "Địa chỉ email không hợp lệ";
                 }
 
-                if (empty ($address)) {
+                if (empty($address)) {
                     $errors['address'] = "Vui lòng nhập địa chỉ";
                 }
 
-                if (empty ($tel)) {
+                if (empty($tel)) {
                     $errors['tel'] = "Vui lòng nhập số điện thoại";
                 }
-                if (empty ($ten)) {
+                if (empty($ten)) {
                     $errors['ten'] = "Vui lòng nhập số tên";
                 }
 
 
-                if (empty ($errors)) {
-                    insert_taikhoan($user, $pass, $email, $address, $tel,$ten);
+                if (empty($errors)) {
+                    insert_taikhoan($user, $pass, $email, $address, $tel, $ten);
                     $thongbao = "ĐĂNG KÍ THÀNH CÔNG";
                 }
             }
             include "./views/taikhoan/dangky.php";
             break;
         case 'dangnhap':
-            if (isset ($_POST['dangnhap']) && ($_POST['dangnhap'])) {
+            if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
                 $user = $_POST['taikhoan'];
                 $pass = $_POST['matkhau'];
 
                 // Validate input fields
-                if (empty ($user) || empty ($pass)) {
+                if (empty($user) || empty($pass)) {
                     $thongbao = "Vui lòng điền đầy đủ thông tin đăng nhập.";
                 } else {
                     // Proceed with user authentication
@@ -129,7 +132,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             include "views/taikhoan/dangnhap.php";
             break;
         case 'edit_taikhoan':
-            if (isset ($_POST['capnhat'])) {
+            if (isset($_POST['capnhat'])) {
                 $user = trim($_POST['user']);
                 $email = trim($_POST['email']);
                 $address = trim($_POST['address']);
@@ -144,7 +147,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             include "views/taikhoan/edit_taikhoan.php";
             break;
         case 'quenmk':
-            if (isset ($_POST['guiemail']) && ($_POST['guiemail'])) {
+            if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];
 
                 $checkemail = checkemail($email);
@@ -166,10 +169,10 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'addtocart':
             $thongbao = "";
-            if (isset ($_SESSION['user']['IDNguoi'])) {
+            if (isset($_SESSION['user']['IDNguoi'])) {
                 $iduser = $_SESSION['user']['IDNguoi'];
 
-                if (isset ($_POST['submit'])) {
+                if (isset($_POST['submit'])) {
                     $id = $_POST['id'];
                     $name = $_POST['name'];
                     $img = $_POST['img'];
@@ -208,7 +211,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'updatecart':
             $thongbao = "";
-            if (isset ($_POST["updatecart"])) {
+            if (isset($_POST["updatecart"])) {
                 $fl = 0;
                 $updatedQuantity = intval($_POST['soluong']);
                 $idGioHang = intval($_POST['idCart']);
@@ -228,7 +231,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             break;
 
         case 'deletecart':
-            if (isset ($_GET['idcart'])) {
+            if (isset($_GET['idcart'])) {
                 Delete_SP_ForCart($idGioHang);
             }
             echo "<script>
@@ -237,7 +240,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
 
             break;
         case 'bill':
-            if (isset ($_SESSION['user']['IDNguoi'])) {
+            if (isset($_SESSION['user']['IDNguoi'])) {
                 $iduser = $_SESSION['user']['IDNguoi'];
                 $ltSp = GetInfor_SpForUserID($iduser);
                 if ($ltSp == null) {
@@ -253,8 +256,8 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'billcomfirm':
             $qr = "";
-            if (isset ($_POST['dongydathang'])) {
-                if (isset ($_SESSION['user']['IDNguoi'])) {
+            if (isset($_POST['dongydathang'])) {
+                if (isset($_SESSION['user']['IDNguoi'])) {
                     $iduser = $_SESSION['user']['IDNguoi'];
                 } else {
                     $iduser = 0;
@@ -266,7 +269,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
                     include "./views/cart/viewbank.php";
                 }
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $ngaydathang = date('d/m/Y h:i A');
+                $ngaydathang = getdate('d/m/Y h:i A');
                 $tongdonhang = tongdonhang($iduser);
                 $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                 if ($ltSp != null) {
@@ -286,7 +289,7 @@ if ((isset ($_GET['act'])) && ($_GET['act'] != "")) {
             include "./views/cart/mybill.php";
             break;
         case 'ctdh':
-            if (isset ($_GET['id'])) {
+            if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $iduser = $_GET['iduser'];
             }

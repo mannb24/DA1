@@ -8,12 +8,12 @@ include "../model/thongke.php";
 include "header.php";
 
 //controller
-if (isset ($_GET['act'])) {
+if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
         case 'adddm':
-            if (isset ($_POST['themmoi']) && ($_POST['themmoi'])) {
-                if (isset ($_POST['tenloai']) && !empty ($_POST['tenloai'])) {
+            if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
+                if (isset($_POST['tenloai']) && !empty($_POST['tenloai'])) {
                     $tenloai = $_POST['tenloai'];
                     inser_danhmuc($tenloai);
                     $thongbao = "Thêm thành công";
@@ -30,7 +30,7 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'xoadm':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_danhmuc($_GET['id']);
             }
             $listdanhmuc = loadall_danhmuc();
@@ -38,14 +38,14 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'suadm':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $dm = loadone_danhmuc($_GET['id']);
             }
             include "danhmuc/update.php";
             break;
 
         case 'updatedm':
-            if (isset ($_POST['capnhat']) && ($_POST['capnhat'])) {
+            if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $tenloai = $_POST['tenloai'];
                 $id = $_POST['id'];
                 $sql = "update danhmuc set TenDanhMuc='" . $tenloai . "'where IDDanhMuc=" . $id;
@@ -56,13 +56,13 @@ if (isset ($_GET['act'])) {
             include "danhmuc/list.php";
             break;
         case 'addsp':
-            if (isset ($_POST['themmoi']) && ($_POST['themmoi'])) {
+            if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
                 if (
-                    isset ($_POST['iddm']) && !empty ($_POST['iddm']) &&
-                    isset ($_POST['tensp']) && !empty ($_POST['tensp']) &&
-                    isset ($_POST['giasp']) && !empty ($_POST['giasp']) &&
-                    isset ($_POST['mota']) && !empty ($_POST['mota']) &&
-                    isset ($_FILES['hinh']) && !empty ($_FILES['hinh']['name'])
+                    isset($_POST['iddm']) && !empty($_POST['iddm']) &&
+                    isset($_POST['tensp']) && !empty($_POST['tensp']) &&
+                    isset($_POST['giasp']) && !empty($_POST['giasp']) &&
+                    isset($_POST['mota']) && !empty($_POST['mota']) &&
+                    isset($_FILES['hinh']) && !empty($_FILES['hinh']['name'])
                 ) {
                     $iddm = $_POST['iddm'];
                     $tensp = $_POST['tensp'];
@@ -89,15 +89,16 @@ if (isset ($_GET['act'])) {
 
 
         case 'listsp':
-            if (isset ($_POST['listok']) && ($_POST['listok'])) {
+            if (isset($_POST['listok']) && ($_POST['listok'])) {
                 $kyw = $_POST['kyw'];
                 $iddm = $_POST['iddm'];
             } else {
                 $kyw = '';
                 $iddm = 0;
             }
-            if (isset ($_POST['currentpage']) && ($_POST['currentpage'] > 0)) {
-                $currentpage = $_POST['currentpage'];
+
+            if (isset($_GET['currentpage'])) {
+                $currentpage = $_GET['currentpage'];
             }
             $listdanhmuc = loadall_danhmuc();
             $listsanpham = loadall_sanpham($kyw, $currentpage, $iddm);
@@ -105,7 +106,7 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'xoasp':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_sanpham($_GET['id']);
             }
             $listsanpham = loadall_sanpham();
@@ -113,7 +114,7 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'suasp':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $sanpham = loadone_sanpham($_GET['id']);
             }
             $listdanhmuc = loadall_danhmuc();
@@ -121,7 +122,7 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'updatesp':
-            if (isset ($_POST['capnhat']) && ($_POST['capnhat'])) {
+            if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $id = $_POST['id'];
                 $iddm = $_POST['iddm'];
                 $tensp = $_POST['tensp'];
@@ -156,14 +157,14 @@ if (isset ($_GET['act'])) {
             include "taikhoan/list.php";
             break;
         case 'xoakh':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_taikhoan($_GET['id']);
             }
             $listtaikhoan = loadall_taikhoan();
             include "taikhoan/list.php";
             break;
         case 'listdh':
-            if (isset ($_POST['kyw'])) {
+            if (isset($_POST['kyw'])) {
                 $kyw = $_POST['kyw'];
             } else {
                 $kyw = "";
@@ -172,14 +173,14 @@ if (isset ($_GET['act'])) {
             include "donhang/list.php";
             break;
         case 'xoadh':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_donhang($_GET['id']);
             }
             $listbill = loadall_bill($kyw, 0);
             include "donhang/list.php";
             break;
         case 'ctdh':
-            if (isset ($_GET['id'])) {
+            if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $iduser = $_GET['iduser'];
             }
@@ -189,7 +190,7 @@ if (isset ($_GET['act'])) {
             include "donhang/ctdh.php";
             break;
         case 'suadh':
-            if (isset ($_GET['id']) && ($_GET['id'] > 0)) {
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 // $sql = "SELECT * FROM danhmuc where id =".$_GET['id'];
                 // $dm = pdo_query_one($sql);
                 $bill = loadone_bill($_GET['id']);
@@ -198,7 +199,7 @@ if (isset ($_GET['act'])) {
             break;
 
         case 'updatedh':
-            if (isset ($_POST['capnhat']) && ($_POST['capnhat'])) {
+            if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $bill_satus = $_POST['bill_satus'];
                 $id = $_POST['id'];
                 update_bill($id, $bill_satus);
@@ -212,7 +213,7 @@ if (isset ($_GET['act'])) {
             // include "donhang/list.php";
             break;
         case 'suathanhtoan':
-            if (isset ($_GET['id'])) {
+            if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 update_bill_thanhtoan($id);
             }

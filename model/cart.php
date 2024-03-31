@@ -18,7 +18,7 @@ function GetInfor_SpForUserID($UserID)
 }
 function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)
 {
-    $sql = "INSERT INTO hoadon(IDNguoi,pttt,ThoiGian,ThanhTien,TrangThai) values('$iduser','$pttt','$ngaydathang','$tongdonhang', 'Chờ xác nhận')";
+    $sql = "INSERT INTO hoadon(IDNguoi,pttt,ThoiGian,ThanhTien) values('$iduser','$pttt','$ngaydathang','$tongdonhang')";
     return pdo_execute_return_lastInsertID($sql);
 }
 

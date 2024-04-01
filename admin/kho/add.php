@@ -79,14 +79,14 @@
                     </div>
 
                     <div class="row frmcontent">
-                        <form action="index.php?act=adddm" method="post">
+                        <form action="index.php?act=addKho" method="post">
                             <div class="row mb10">Tên loại: <br>
                                 <input type="text" name="tenkho">
                             </div>
                             <div class="row mb10">
                                 <input type="submit" name="themmoi" value="Thêm mới">
                                 <input type="reset" value="Nhập lại">
-                                <a href="index.php?act=lisdm"> <input type="button" value="Danh sách"></a>
+                                <a href="index.php?act=lisKho"> <input type="button" value="Danh sách"></a>
                             </div>
                             <?php
                             if (isset($thongbao) && ($thongbao != ""))

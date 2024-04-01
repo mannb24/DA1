@@ -5,6 +5,9 @@ include "../model/binhluan.php";
 include "../model/sanpham.php";
 include "../model/taikhoan.php";
 include "../model/cart.php";
+include "../model/kho.php";
+
+
 include "../model/thongke.php";
 include "header.php";
 
@@ -47,8 +50,9 @@ if (isset($_GET['act'])) {
         case 'addKho':
             if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
                 if (isset($_POST['tenkho']) && !empty($_POST['tenkho'])) {
+                   
                     $tenloai = $_POST['tenkho'];
-                    inser_danhkho($tenloai);
+                    inser_kho($tenloai);
                     $thongbao = "Thêm thành công";
                 } else {
                     echo "<script>alert('Vui lòng nhập tên loại!');</script>";
@@ -58,7 +62,7 @@ if (isset($_GET['act'])) {
             break;
 
         case 'lisKho':
-            $listdanhmuc = loadall_kho();
+            $listKho = loadall_kho();
             include "kho/list.php";
             break;
 

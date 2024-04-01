@@ -84,7 +84,7 @@ if (is_array($dm)) {
                     </div>
 
                     <div class="row frmcontent">
-                        <form action="index.php?act=updatedm" method="post">
+                        <form action="index.php?act=updateKHo" method="post">
                             <div class="row mb10">Mã loại <br>
                                 <input type="text" name="maloai" disabled placeholder=<?php echo "$IDKho"; ?>>
                             </div>

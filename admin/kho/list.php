@@ -112,6 +112,7 @@
         box-sizing: 3px;
     }
 </style>
+<h1>dđmmm</h1>
 <div class="content-page">
     <div class="content">
 
@@ -143,13 +144,14 @@
 
                                 </tr>
                                 <?php
-                                foreach ($listdanhmuc as $danhmuc) {
-                                    $suadm = "index.php?act=suaKho&id=" . $danhmuc['IDKho'];
-                                    $xoadm = "index.php?act=xoaKho&id=" . $danhmuc['IDKho'];
+                                foreach ($listKho as $kho) {
+                                    extract($kho);
+                                    $suadm = "index.php?act=suaKho&id=" . $IDKho;
+                                    $xoadm = "index.php?act=xoaKho&id=" . $IDKho;
                                     echo '<tr>
                                     <td><input type="checkbox"></td>
-                                    <td>' . $danhmuc['IDKho'] . '</td>
-                                    <td>' . $danhmuc['TenLoai'] . '</td>
+                                    <td>' . $IDKho . '</td>
+                                    <td>' . $TenLoai . '</td>
                                     <td><a href="' . $suadm . '"><input type="button" value="Sửa"></a> <a href="' . $xoadm . '"><input type="button" value="Xoá"></a></td>
                                 </tr>';
                                 }

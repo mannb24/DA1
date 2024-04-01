@@ -45,7 +45,8 @@
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle waves-light waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-light waves-effect" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="fe-bell noti-icon"></i>
                         <span class="badge badge-danger rounded-circle noti-icon-badge">5</span>
                     </a>
@@ -74,7 +75,8 @@
                                 </p>
                             </a>
                             <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                            <a href="javascript:void(0);"
+                                class="dropdown-item text-center text-primary notify-item notify-all">
                                 View all
                                 <i class="fi-arrow-right"></i>
                             </a>
@@ -83,7 +85,8 @@
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="assets\images\users\user-1.jpg" alt="user-image" class="rounded-circle" width="100px">
                         <span class="pro-user-name ml-1">
                             Admin <i class="mdi mdi-chevron-down"></i>
@@ -142,7 +145,8 @@
                 <a href="index.html" class="logo text-center">
                     <span class="logo-lg">
                         <a href="index.php">
-                            <img src="assets\images\users\logo2.png" class="rounded-circle" width="150px" height="120px">
+                            <img src="assets\images\users\logo2.png" class="rounded-circle" width="150px"
+                                height="120px">
 
                         </a>
 
@@ -182,10 +186,10 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="index.php?act=lisdm">Danh sách Kho</a>
+                                    <a href="index.php?act=lisKho">Danh sách Kho</a>
                                 </li>
                                 <li>
-                                    <a href="index.php?act=adddm">Thêm vào kho</a>
+                                    <a href="index.php?act=addKho">Thêm vào kho</a>
                                 </li>
                             </ul>
                         </li>
@@ -302,7 +306,8 @@
                 <!-- User box -->
                 <div class="user-box">
                     <div class="user-img">
-                        <img src="assets\images\users\user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
+                        <img src="assets\images\users\user-1.jpg" alt="user-img" title="Mat Helme"
+                            class="rounded-circle img-fluid">
                         <a href="javascript:void(0);" class="user-edit"><i class="mdi mdi-pencil"></i></a>
                     </div>
 

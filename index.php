@@ -15,7 +15,7 @@ $currentpage = 1;
 if (isset($_GET['currentpage'])) {
     $currentpage = $_GET['currentpage'];
 }
-$spnew = loadall_sanpham_trangchu($currentpage);
+$spnew = loadall_sanpham_trangchu();
 $dmsp = loadall_danhmuc();
 if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
@@ -32,12 +32,12 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             } else {
                 $iddm = 0;
             }
-            $dssp =loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0);
+            $dssp = loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0);
             $tendm = load_ten_dm($iddm);
             include "./views/categories.php";
             break;
-           
-            
+
+
         case 'post':
             include "./views/post.php";
             break;
@@ -300,15 +300,15 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             $bill = loadone_bill($id);
             include "./views/cart/chitietdonhang.php";
             break;
-            // case 'star':
-            //     if (isset ($_GET['id'])) {
-            //         $id = $_GET['id'];
-            //     }
-            //     $taikhoan = loadone_taikhoan($iduser);
-            //     $cart = loadcart_cthoadon($id);
-            //     $bill = loadone_bill($id);
-            //     include "./views/cart/chitietdonhang.php";
-            //     break;
+        // case 'star':
+        //     if (isset ($_GET['id'])) {
+        //         $id = $_GET['id'];
+        //     }
+        //     $taikhoan = loadone_taikhoan($iduser);
+        //     $cart = loadcart_cthoadon($id);
+        //     $bill = loadone_bill($id);
+        //     include "./views/cart/chitietdonhang.php";
+        //     break;
         default:
             include "./views/home.php";
             break;

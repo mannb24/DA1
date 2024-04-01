@@ -44,7 +44,49 @@ if (isset($_GET['act'])) {
             }
             include "danhmuc/update.php";
             break;
+        case 'addKho':
+            if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
+                if (isset($_POST['tenkho']) && !empty($_POST['tenkho'])) {
+                    $tenloai = $_POST['tenkho'];
+                    inser_danhkho($tenloai);
+                    $thongbao = "Thêm thành công";
+                } else {
+                    echo "<script>alert('Vui lòng nhập tên loại!');</script>";
+                }
+            }
+            include "kho/add.php";
+            break;
 
+        case 'lisKho':
+            $listdanhmuc = loadall_kho();
+            include "kho/list.php";
+            break;
+
+        case 'xoaKho':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_kho($_GET['id']);
+            }
+            $listdanhmuc = loadall_kho();
+            include "kho/list.php";
+            break;
+
+        case 'suaKho':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $dm = loadone_kho($_GET['id']);
+            }
+            include "kho/update.php";
+            break;
+        case 'updateKho':
+            if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
+                $tenloai = $_POST['tenkho'];
+                $id = $_POST['id'];
+                $sql = "update kho set TenLoai='" . $tenloai . "'where IDKho=" . $id;
+                pdo_execute($sql);
+                $thongbao = "Cập nhật thành công";
+            }
+            $listdanhmuc = loadall_danhmuc();
+            include "danhmuc/list.php";
+            break;
         case 'updatedm':
             if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $tenloai = $_POST['tenloai'];
@@ -97,7 +139,7 @@ if (isset($_GET['act'])) {
                 $kyw = '';
                 $iddm = 0;
             }
-
+            $currentpage = 1;
             if (isset($_GET['currentpage'])) {
                 $currentpage = $_GET['currentpage'];
             }

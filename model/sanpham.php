@@ -24,9 +24,12 @@ function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
     if ($kyw != "") {
         $sql .= " and TenSanPham like '%" . $kyw . "%'";
     }
+   
     if ($iddm > 0) {
         $sql .= " and IDDanhMuc= '" . $iddm . "'";
     }
+  
+
     $sql .= "order by IDSanPham desc";
     $pagesize = 10;
     // echo "<script>console.log($currentpage)</script>";
@@ -39,6 +42,10 @@ function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }
+
+
+
+
 function load_ten_dm($iddm)
 {
     if ($iddm > 0) {

@@ -21,7 +21,9 @@
 		box-sizing: border-box;
 		/* Include padding and border in the element's total width and height */
 	}
-
+	#productName {
+        height: 30px; /* Điều chỉnh chiều cao của trường nhập tại đây */
+    }
 	/* ... (previous styles remain unchanged) ... */
 </style>
 
@@ -42,18 +44,58 @@
 					<ul class="sidebar_categories">
 						<li><a href="index.php?act=categories&iddm=0">Tất cả sản phẩm</a></li>
 
-						<?php foreach ($dmsp as $dm): ?>
+						<?php foreach ($dmsp as $dm) : ?>
 							<li><a href="index.php?act=categories&iddm=<?= $dm['IDDanhMuc'] ?>">
 									<?= $dm['TenDanhMuc'] ?>
 								</a></li>
 						<?php endforeach; ?>
 
 					</ul>
+					<div class="sidebar_section">
+						<div class="sidebar_title">
+							<h5>Lọc sản phẩm</h5>
+						</div>
+						<form id="filterForm"  action="index.php?act=categories" method="post">
+							<div class="form-group">
+								<label for="productName">Tên sản phẩm:</label>
+								<input type="text" class="form-control" id="productName" name="">
+							</div>
+							<div class="form-group">
+								<label for="minPrice">Giá từ:</label>
+								<input type="number" min="0" class="form-control" id="minPrice" name="minPrice" onchange="checkMaxPrice()">
+							</div>
+							<div class="form-group">
+								<label for="maxPrice">Đến:</label>
+								<input type="number" class="form-control" id="maxPrice" name="maxPrice">
+							</div>
+							<div class="form-group">
+								<label for="category">Danh mục:</label>
+								<select class="form-control" id="category" name="category">
+									<option value="">Tất cả</option>
+
+									<?php foreach ($dmsp as $dm) : ?>
+										<option value="<?= $dm['IDDanhMuc'] ?>"><?= $dm['TenDanhMuc'] ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary" name="timkiem">Lọc</button>
+						</form>
+					</div>
+
 				</div>
 			</div>
 
 			<!-- Main Content -->
+			<script>
+    function checkMaxPrice() {
+        var minPrice = document.getElementById("minPrice").value;
+        var maxPriceInput = document.getElementById("maxPrice");
 
+        if (maxPriceInput.value !== "" && parseInt(maxPriceInput.value) < parseInt(minPrice)) {
+            maxPriceInput.value = minPrice;
+        }
+    }
+</script>
 			<div class="main_content">
 
 				<!-- Products -->
@@ -64,7 +106,7 @@
 
 
 							<div class="product-grid">
-								<?php foreach ($dssp as $sp): ?>
+								<?php foreach ($dssp as $sp) : ?>
 
 									<div class="product-item women">
 										<div class="product product_filter">
@@ -73,8 +115,7 @@
 											</a>
 											<div class="favorite"></div>
 											<div class="product_info">
-												<h6 class="product_name"><a a
-														href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
+												<h6 class="product_name"><a a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">
 														<?= $sp['TenSanPham'] ?>
 													</a></h6>
 												<div class="product_price">
@@ -85,8 +126,7 @@
 
 											</div>
 										</div>
-										<div class="red_button add_to_cart_button"><a
-												href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a>
+										<div class="red_button add_to_cart_button"><a href="index.php?act=ctsp&idsp=<?= $sp['IDSanPham'] ?>">Chi tiết sản phẩm</a>
 										</div>
 
 									</div>

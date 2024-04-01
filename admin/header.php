@@ -253,7 +253,7 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="">Danh sách bình luận</a>
+                                    <a href="index.php?act=listbl">Danh sách bình luận</a>
                                 </li>
                             </ul>
                         </li>

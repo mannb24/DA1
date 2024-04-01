@@ -56,6 +56,21 @@
                             </div>
                             <h3 class="page-title">DANH SÁCH SẢN PHẨM</h3>
                         </div>
+                        <form action="index.php?act=listsp" method="post">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-6">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="kyw">
+                                            <input type="hidden" name="listok" value="1"> <!-- Giá trị này chỉ ra rằng biểu mẫu đã được gửi đi -->
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit" name="timkiem">Tìm kiếm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <div class="container-fluid">
                             <div class="card shadow mb-4">
                                 <div class="card-body">

@@ -30,7 +30,7 @@ function delete_binhluan($id)
 
 function all_binhluan()
 {
-    $sql = "select * from danhgia where 1 order by id desc";
+    $sql = "select * from danhgia where 1 order by IDDanhGia desc";
     $listbl = pdo_query($sql);
     return $listbl;
 }

@@ -1,6 +1,7 @@
 <?php
 include "../model/pdo.php";
 include "../model/danhmuc.php";
+include "../model/binhluan.php";
 include "../model/sanpham.php";
 include "../model/taikhoan.php";
 include "../model/cart.php";
@@ -147,6 +148,11 @@ if (isset($_GET['act'])) {
         case 'listtk':
             $listthongke = loadall_thongke();
             include "thongke/listthongke.php";
+            break;
+
+        case 'listbl':
+            $listbl = all_binhluan();
+            include "binhluan/list.php";
             break;
         case 'bieudo':
             $listthongke = loadall_thongke();

@@ -234,6 +234,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
 
         case 'deletecart':
             if (isset($_GET['idcart'])) {
+                $idGioHang = $_GET['idcart'];
                 Delete_SP_ForCart($idGioHang);
             }
             echo "<script>
@@ -271,7 +272,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     include "./views/cart/viewbank.php";
                 }
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $ngaydathang = getdate('d/m/Y h:i A');
+                $ngaydathang = date('d/m/Y h:i A');
                 $tongdonhang = tongdonhang($iduser);
                 $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                 if ($ltSp != null) {

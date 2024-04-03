@@ -113,9 +113,9 @@ function insert_bill_sp($idhoadon, $idsanpham, $SoLuong)
     $sql = "INSERT INTO hoadon_sanpham(IDHoaDon,IDSanPham, SoLuong) values('$idhoadon','$idsanpham',$SoLuong)";
     return pdo_execute($sql);
 }
-function Delete_SP_ForCart($idGioHang, $id)
+function Delete_SP_ForCart($idGioHang)
 {
-    $sql = "DELETE giohang where IDGioHang=" . $idGioHang;
+    $sql = "DELETE FROM giohang where IDGioHang = " . $idGioHang;
     pdo_execute($sql);
 }
 function Delete_All_SP_ForCart($iduser)
@@ -123,7 +123,6 @@ function Delete_All_SP_ForCart($iduser)
     $sql = "DELETE FROM giohang where IDNguoi = " . $iduser;
     pdo_execute($sql);
 }
-
 
 function get_ttdh($n)
 {

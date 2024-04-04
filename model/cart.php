@@ -34,6 +34,12 @@ function loadone_bill($id)
     $bill = pdo_query_one($sql);
     return $bill;
 }
+function Delete_billForUser($id, $idUser)
+{
+    $sql = "DELETE FROM hoadon where IDHoaDon =" . $id . " AND IDNguoi = " . $idUser;
+    $bill = pdo_query_one($sql);
+    return $bill;
+}
 function loadCT_bill($id)
 {
     $sql = "select h.SoLuong,s.* from hoadon_sanpham h JOIN sanpham s on s.IDSanPham = h.IDSanPham where IDHoaDon =" . $id;

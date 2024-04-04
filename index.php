@@ -301,6 +301,15 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             $bill = loadone_bill($id);
             include "./views/cart/chitietdonhang.php";
             break;
+        case 'Huydh':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $iduser = $_GET['iduser'];
+            }
+            $bill = Delete_billForUser($id, $iduser);
+            $listbill = loadall_bill($_SESSION['user']['IDNguoi']);
+            include "./views/cart/mybill.php";
+            break;
         // case 'star':
         //     if (isset ($_GET['id'])) {
         //         $id = $_GET['id'];

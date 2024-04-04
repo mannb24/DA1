@@ -1,9 +1,10 @@
 <style>
-    p{
-        
+    p {
+
         color: black;
     }
-    .card-body{
+
+    .card-body {
         padding: 180px;
     }
 </style>
@@ -15,10 +16,10 @@
 
             <div class="container-fluid">
                 <?php extract($bill);
-                $pttt = get_pttt($bill['bill_pttt']);
-                $ttdh = get_ttdh($bill['bill_satus']);
-                extract($taikhoan);
-                $tttt = get_tttt($bill['bill_thanhtoan']);
+                $pttt = get_pttt($bill['pttt']);
+                $ttdh = get_ttdh($bill['TrangThai']);
+                // extract($taikhoan);
+                $tttt = get_tttt($bill['TrangThaiThanhToan']);
                 ?>
 
                 <div class="card shadow mb-4">
@@ -27,14 +28,30 @@
 
                             <div class="thongtin">
                                 <h3 class="page-title">Chi tiết hóa đơn</h3>
-                                <p>Người đặt hàng : <?= $taikhoan['user'] ?></p>
-                                <p>Số điện thoại : <?= $taikhoan['tel'] ?></p>
-                                <p>Địa chỉ : <?= $taikhoan['address'] ?></p>
-                                <p>email : <?= $taikhoan['email'] ?></p>
-                                <p>Phương thức thanh toán : <?= $pttt ?></p>
-                                <p>Tình trạng đơn hàng : <?= $ttdh ?></p>
-                                <p>Ngày lập hóa đơn : <?= $bill['ngaydathang'] ?></p>
-                                <p>Tình trạng thanh toán : <?= $tttt ?></p>
+                                <p>Người đặt hàng :
+                                    <?= $taikhoan['Ten'] ?>
+                                </p>
+                                <p>Số điện thoại :
+                                    <?= $taikhoan['SoDienThoai'] ?>
+                                </p>
+                                <p>Địa chỉ :
+                                    <?= $taikhoan['DiaChi'] ?>
+                                </p>
+                                <p>email :
+                                    <?= $taikhoan['Email'] ?>
+                                </p>
+                                <p>Phương thức thanh toán :
+                                    <?= $pttt ?>
+                                </p>
+                                <p>Tình trạng đơn hàng :
+                                    <?= $ttdh ?>
+                                </p>
+                                <p>Ngày lập hóa đơn :
+                                    <?= $bill['ThoiGian'] ?>
+                                </p>
+                                <p>Tình trạng thanh toán :
+                                    <?= $tttt ?>
+                                </p>
 
                             </div>
                             <table class="table table-bordered" width="100%" cellspacing="0">
@@ -50,24 +67,30 @@
                                 <tbody>
                                     <?php $tong = 0;
                                     ?>
-                                    <?php foreach ($cart as $cart) : ?>
+                                    <?php foreach ($cart as $c): ?>
                                         <?php
-                                        $tong += $cart['thanhtien'];
+                                        $tong += $c['Gia'] * $c['SoLuong'];
 
                                         ?>
 
                                         <tr>
                                             <td class="cart_product_img">
-                                                <img src="./views/images/<?= $cart['img'] ?> " alt="" height="100">
+                                                <img src="./views/images/<?= $c['AnhBia'] ?>" alt="" style=" height: 100px">
                                             </td>
                                             <td class="cart_product_desc">
-                                                <h5><?= $cart['name'] ?></h5>
+                                                <h5>
+                                                    <?= $c['TenSanPham'] ?>
+                                                </h5>
                                             </td>
                                             <td class="price">
-                                                <span><?= number_format($cart['price']) ?> đ</span>
+                                                <span>
+                                                    <?= number_format($c['Gia']) ?> đ
+                                                </span>
                                             </td>
                                             <td class="price">
-                                                <span><?= $cart["soluong"] ?></span>
+                                                <span>
+                                                    <?= $c["SoLuong"] ?>
+                                                </span>
                                             </td>
 
                                         </tr>
@@ -75,6 +98,8 @@
                                 </tbody>
                             </table>
                             <p class="tien" style="color: red;font-size: 16px;">
-                            Tổng thanh toán : <?= number_format($bill['total']) ?> đ</p>
-                                                         
+                                Tổng thanh toán :
+                                <?= number_format($tong) ?> đ
+                            </p>
+
                         </div>

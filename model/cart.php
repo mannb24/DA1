@@ -77,7 +77,7 @@ function loadall_bill($iduser)
 }
 function loadcart_cthoadon($id)
 {
-    $sql = "SELECT * FROM hoadon WHERE IDHoaDon  = $id";
+    $sql = "SELECT h.IDHoaDon, h.SoLuong,s.* FROM hoadon_sanpham h join sanpham s on s.IDSanPham = h.IDSanPham WHERE IDHoaDon  = $id";
     $product = pdo_query($sql);
     return $product;
 }

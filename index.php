@@ -272,7 +272,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     include "./views/cart/viewbank.php";
                 }
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $ngaydathang = date('d/m/Y h:i A');
+                $ngaydathang = date('d/m/Y h:i:s');
                 $tongdonhang = tongdonhang($iduser);
                 $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                 if ($ltSp != null) {

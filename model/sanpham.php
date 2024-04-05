@@ -1,8 +1,18 @@
 <?php
-function inser_sanpham($tensp, $price, $img, $mota, $iddm)
+function inser_sanpham($tensp, $price, $img, $mota, $iddm,$SoLuongSP,$listKho)
 {
-    $sql = "insert into sanpham (TenSanPham,Gia,AnhBia,Mota,IDDanhMuc) values('$tensp','$price','$img','$mota','$iddm')";
+    $sql = "insert into sanpham (TenSanPham,Gia,AnhBia,Mota,IDDanhMuc,SoLuongSP) values('$tensp','$price','$img','$mota','$iddm','$SoLuongSP')";
     pdo_execute($sql);
+
+    $lastInsertedID = pdo_execute_return_lastInsertID($sql);
+
+    foreach ($listKho as $IDKho) {
+        $sql = "INSERT INTO kho_sanpham (IDSanPham, IDKho) 
+                VALUES ('$lastInsertedID', '$IDKho')";
+        pdo_execute($sql);
+    }
+    
+
 }
 function delete_sanpham($id)
 {

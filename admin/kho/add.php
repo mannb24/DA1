@@ -84,6 +84,14 @@
                                 <input type="text" name="tenkho">
                             </div>
                             <div class="row mb10">
+                                Loại: <br>
+                                <select name="type">
+                                    <option value="1">Size </option>
+                                    <option value="2">Màu</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="row mb10">
                                 <input type="submit" name="themmoi" value="Thêm mới">
                                 <input type="reset" value="Nhập lại">
                                 <a href="index.php?act=lisKho"> <input type="button" value="Danh sách"></a>

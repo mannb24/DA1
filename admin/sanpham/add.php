@@ -37,12 +37,38 @@
                                                 </select>
                                             </div>
                                             <div class="input">
+                                                Danh mục <br>
+                                                <select name="kho[]" multiple>
+                                                    <?php
+                                                    foreach ($listKho1 as $kho) {
+                                                        extract($kho);
+                                                        echo '<option value="' . $IDKho . '">' . $TenLoai . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="input">
+                                                Danh mục <br>
+                                                <select name="kho[]" multiple >
+                                                    <?php
+                                                    foreach ($listKho2 as $kho) {
+                                                        extract($kho);
+                                                        echo '<option value="' . $IDKho . '">' . $TenLoai . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="input">
                                                 Tên sản phẩm <br>
                                                 <input type="text" name="tensp">
                                             </div>
                                             <div class="input">
                                                 Giá <br>
                                                 <input type="text" name="giasp">
+                                            </div>
+                                            <div class="input">
+                                                Số lượng <br>
+                                                <input type="number" name="SoLuongSP">
                                             </div>
                                             <div class="input ">
                                                 Hình ảnh <br>

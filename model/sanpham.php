@@ -2,18 +2,19 @@
 function inser_sanpham($tensp, $price, $img, $mota, $iddm,$SoLuongSP,$listKho)
 {
     $sql = "insert into sanpham (TenSanPham,Gia,AnhBia,Mota,IDDanhMuc,SoLuongSP) values('$tensp','$price','$img','$mota','$iddm','$SoLuongSP')";
-    pdo_execute($sql);
+    // pdo_execute($sql);
 
     $lastInsertedID = pdo_execute_return_lastInsertID($sql);
 
     foreach ($listKho as $IDKho) {
-        $sql = "INSERT INTO kho_sanpham (IDSanPham, IDKho) 
+        $sql1 = "INSERT INTO kho_sanpham (IDSanPham, IDKho) 
                 VALUES ('$lastInsertedID', '$IDKho')";
-        pdo_execute($sql);
+        pdo_execute($sql1);
     }
     
 
 }
+
 function delete_sanpham($id)
 {
     $sql = "delete from sanpham where IDSanPham=" . $id;

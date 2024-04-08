@@ -148,6 +148,9 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             }
             include "views/taikhoan/edit_taikhoan.php";
             break;
+            case 'danhgia':
+                include "views/cart/danhgia.php";
+                break;
         case 'quenmk':
             if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];

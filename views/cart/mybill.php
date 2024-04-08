@@ -52,7 +52,7 @@
                                             href="index.php?act=ctdh&id=<?= $bill['IDHoaDon'] ?>&&act=ctdh&iduser=<?= $bill['IDNguoi'] ?>"><input
                                                 class="btn-info" type="button" value="Chi tiết hóa đơn "></a>
                                                 <a
-                                            href="views/cart/danhgia.php"><input
+                                            href="index.php?act=danhgia"><input
                                                 class="btn-info" type="button" value="Đánh giá "></a>
                                         <a
                                             href="index.php?act=Huydh&id=<?= $bill['IDHoaDon'] ?>&&act=Huydh&iduser=<?= $bill['IDNguoi'] ?>"><input

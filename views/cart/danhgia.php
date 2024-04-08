@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +20,6 @@
         .form-control{
             max-width: 100%;
             height: 200px;
-            padding-bottom: 150px;
         }
         .form-control:focus::placeholder,
         .form-control:not(:placeholder-shown)::placeholder {
@@ -41,7 +42,7 @@
     <form action="" method="POST">
         <div class="form-group">
             <label for="comment">Nội dung đánh giá:</label>
-            <input class="form-control" name="noidung" id="comment" rows="4" placeholder="Nhập nhận xét của bạn về sản phẩm"></input>
+            <textarea class="form-control" name="noidung" id="comment" rows="4" placeholder="Nhập nhận xét của bạn về sản phẩm"></textarea>
         </div>
         <button type="submit" name="" class="btn btn-primary">Gửi</button>
     </form>

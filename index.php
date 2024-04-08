@@ -223,7 +223,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                             insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                         }
                     } else {
-                        insert_cart($iduser, $id, $soluong, $thanhtien, $mau, $size);
+                        insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                     }
                 }
             } else {

@@ -61,10 +61,13 @@
                                 <div class="row">
                                     <div class="col-md-6 offset-md-6">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="kyw">
-                                            <input type="hidden" name="listok" value="1"> <!-- Giá trị này chỉ ra rằng biểu mẫu đã được gửi đi -->
+                                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm"
+                                                name="kyw">
+                                            <input type="hidden" name="listok" value="1">
+                                            <!-- Giá trị này chỉ ra rằng biểu mẫu đã được gửi đi -->
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit" name="timkiem">Tìm kiếm</button>
+                                                <button class="btn btn-primary" type="submit" name="timkiem">Tìm
+                                                    kiếm</button>
                                             </div>
                                         </div>
                                     </div>
@@ -117,6 +120,10 @@
                                                                 </a>
                                                                 <a href="#" onclick="confirmDelete(\'' . $xoasp . '\')">
                                                                     <input class="btn-danger" type="button" value="Xóa">
+                                                                </a>
+                                                                
+                                                                <a href="listdanhgia.php" >
+                                                                    <input class="btn-danger" type="button" value="Danh sách đánh giá">
                                                                 </a>
                                                             </td>
                                                         </tr>

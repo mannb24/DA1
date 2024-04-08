@@ -5,6 +5,7 @@ include "./model/sanpham.php";
 include "./model/danhmuc.php";
 include "./model/taikhoan.php";
 include "./model/kho.php";
+include "./model/binhluan.php";
 include "./model/cart.php";
 include "./model/bank.php";
 include "./views/header.php";
@@ -46,8 +47,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             if ((isset($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
-                $mau  = loadall_kho_type_1_ct($id,2);
-                $size = loadall_kho_type_1_ct($id,1);
+                $mau = loadall_kho_type_1_ct($id, 2);
+                $size = loadall_kho_type_1_ct($id, 1);
                 extract($onesp);
                 $sp_cung_loai = load_sanphamcungloai($id, $onesp['IDDanhMuc']);
                 include "./views/chitietsp.php";
@@ -151,9 +152,22 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             }
             include "views/taikhoan/edit_taikhoan.php";
             break;
-            case 'danhgia':
-                include "views/cart/danhgia.php";
-                break;
+        case 'danhgia':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                if (isset($_POST['add_dg'])) {
+                    $noidung = $_POST['noidung'];
+                    $sao = $_POST['sao'];
+                    $IDSanPham = $id;
+                    $IDNguoi = $_SESSION['user']['IDNguoi'];
+                    $ngayBinhLuan = date(' d/m/Y');
+                    insert_bl($IDNguoi, $noidung, $sao, $ngayBinhLuan, $IDSanPham);
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                }
+            }
+
+            include "views/cart/danhgia.php";
+            break;
         case 'quenmk':
             if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];
@@ -206,10 +220,10 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         }
                         // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
                         if (!$productExists) {
-                            insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size);
+                            insert_cart($iduser, $idpro, $soluong, $thanhtien, $mau, $size);
                         }
                     } else {
-                        insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size);
+                        insert_cart($iduser, $idpro, $soluong, $thanhtien, $mau, $size);
                     }
                 }
             } else {
@@ -287,7 +301,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
                     }
                 }
-                // Delete_All_SP_ForCart($iduser);
+                Delete_All_SP_ForCart($iduser);
             }
             $taikhoan = loadone_taikhoan($iduser);
             $bill = loadone_bill($idbill);

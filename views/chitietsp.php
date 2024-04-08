@@ -166,7 +166,7 @@
 						<!-- ... (previous input fields remain unchanged) ... -->
 						<div class="color_selection">
 							<span>Chọn màu:</span>
-							<select name="color" id="color">
+							<select name="mau" id="color">
 								<?php foreach ($mau as $m) {
 								?>
 									<option value="<?= $m['TenLoai'] ?>"><?= $m['TenLoai'] ?></option>
@@ -178,7 +178,7 @@
 						<!-- Size Selection -->
 						<div class="color_selection">
 							<span>Chọn size:</span>
-							<select name="color" id="color">
+							<select name="size" id="color">
 								<?php foreach ($size as $s) {
 								?>
 									<option value="<?= $s['TenLoai'] ?>"><?= $s['TenLoai'] ?></option>

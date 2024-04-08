@@ -22,9 +22,9 @@ function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)
     return pdo_execute_return_lastInsertID($sql);
 }
 
-function insert_cart($iduser, $idpro, $soluong, $thanhtien)
+function insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size)
 {
-    $sql = "INSERT INTO giohang(IDNguoi,IDSanPham,SoLuong,ThanhTien) values('$iduser','$idpro','$soluong','$thanhtien')";
+    $sql = "INSERT INTO giohang(IDNguoi,IDSanPham,SoLuong,ThanhTien,mau,size) values('$iduser','$idpro','$soluong','$thanhtien','$mau','$size')";
     return pdo_execute($sql);
 }
 

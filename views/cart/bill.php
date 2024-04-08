@@ -163,7 +163,7 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <?= $cart['SoLuong'] ?>
+                                                <?= $cart['size'] ?>
                                             </td>
                                             <td class="price">
                                                 <span>

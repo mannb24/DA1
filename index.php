@@ -220,10 +220,10 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         }
                         // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
                         if (!$productExists) {
-                            insert_cart($iduser, $idpro, $soluong, $thanhtien, $mau, $size);
+                            insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                         }
                     } else {
-                        insert_cart($iduser, $idpro, $soluong, $thanhtien, $mau, $size);
+                        insert_cart($iduser, $id, $soluong, $thanhtien, $mau, $size);
                     }
                 }
             } else {

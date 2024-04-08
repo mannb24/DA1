@@ -13,7 +13,7 @@ function tongdonhang($iduser)
 
 function GetInfor_SpForUserID($UserID)
 {
-    $sql = "SELECT g.IDGioHang,g.IDNguoi,g.SoLuong,g.ThanhTien,s.* FROM giohang g Join sanpham s on g.IDSanPham = s.IDSanPham where g.IDNguoi = " . $UserID;
+    $sql = "SELECT g.IDGioHang,g.IDNguoi,g.SoLuong,g.ThanhTien,g.mau,g.size,s.* FROM giohang g Join sanpham s on g.IDSanPham = s.IDSanPham where g.IDNguoi = " . $UserID;
     return pdo_query($sql);
 }
 function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)

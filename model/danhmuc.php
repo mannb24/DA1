@@ -16,6 +16,7 @@ function loadall_danhmuc()
     $listdanhmuc = pdo_query($sql);
     return $listdanhmuc;
 }
+
 function loadone_danhmuc($id)
 {
     $sql = "SELECT * from danhmuc where IDDanhMuc=" . $id;

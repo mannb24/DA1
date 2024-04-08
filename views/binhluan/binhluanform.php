@@ -83,7 +83,8 @@ $listbl = loadall_bl($IDSanPham);
         // $sao = $_POST['sao'];
         $IDSanPham = $_POST['IDSanPham'];
         $IDNguoi = $_SESSION['user']['IDNguoi'];
-        $ngayBinhLuan = date(' d/m/Y');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $ngayBinhLuan = date('d/m/Y h:i:s ');
         insert_bl($IDNguoi, $noidung, '', $ngayBinhLuan, $IDSanPham);
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }

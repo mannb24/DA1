@@ -4,6 +4,7 @@ include "./model/pdo.php";
 include "./model/sanpham.php";
 include "./model/danhmuc.php";
 include "./model/taikhoan.php";
+include "./model/kho.php";
 include "./model/cart.php";
 include "./model/bank.php";
 include "./views/header.php";
@@ -45,6 +46,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             if ((isset($_GET['idsp'])) && ($_GET['idsp'] > 0)) {
                 $id = $_GET['idsp'];
                 $onesp = loadone_sanpham($id);
+                $mau  = loadall_kho_type_1_ct($id,2);
+                $size = loadall_kho_type_1_ct($id,1);
                 extract($onesp);
                 $sp_cung_loai = load_sanphamcungloai($id, $onesp['IDDanhMuc']);
                 include "./views/chitietsp.php";
@@ -184,7 +187,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     $price = $_POST['price'];
                     $soluong = $_POST['soluong'];
                     $ttien = $soluong * $price;
-                    // $size = $_POST['size'];
+                    $size = $_POST['size'];
+                    $mau = $_POST['mau'];
 
                     $ltSp = GetInfor_SpForUserID($iduser);
                     if ($ltSp != null) {
@@ -202,10 +206,10 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         }
                         // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
                         if (!$productExists) {
-                            insert_cart($iduser, $id, $soluong, $ttien);
+                            insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size);
                         }
                     } else {
-                        insert_cart($iduser, $id, $soluong, $ttien);
+                        insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size);
                     }
                 }
             } else {
@@ -275,7 +279,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     include "./views/cart/viewbank.php";
                 }
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $ngaydathang = date('d/m/Y h:i A');
+                $ngaydathang = date('d/m/Y h:i:s');
                 $tongdonhang = tongdonhang($iduser);
                 $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                 if ($ltSp != null) {

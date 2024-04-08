@@ -22,7 +22,7 @@
 
 <body>
 
-    <!-- Begin page -->
+    Begin page
     <div id="wrapper">
 
         <!-- Topbar Start -->

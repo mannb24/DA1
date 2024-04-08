@@ -52,7 +52,9 @@ if (isset($_GET['act'])) {
                 if (isset($_POST['tenkho']) && !empty($_POST['tenkho'])) {
                    
                     $tenloai = $_POST['tenkho'];
-                    inser_kho($tenloai);
+                    $Type = $_POST['type'];
+                    
+                    insert_kho($tenloai, $Type);
                     $thongbao = "Thêm thành công";
                 } else {
                     echo "<script>alert('Vui lòng nhập tên loại!');</script>";
@@ -70,7 +72,7 @@ if (isset($_GET['act'])) {
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_kho($_GET['id']);
             }
-            $listdanhmuc = loadall_kho();
+            $listKho = loadall_kho();
             include "kho/list.php";
             break;
 
@@ -115,6 +117,7 @@ if (isset($_GET['act'])) {
                     $tensp = $_POST['tensp'];
                     $giasp = $_POST['giasp'];
                     $mota = $_POST['mota'];
+                    $SoLuongSP = $_POST['SoLuongSP'];
                     $img = $_FILES['hinh']['name'];
                     $target_dir = "../views/images/";
                     $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
@@ -124,13 +127,21 @@ if (isset($_GET['act'])) {
                         //
                     }
 
-                    inser_sanpham($tensp, $giasp, $img, $mota, $iddm);
+                    inser_sanpham($tensp, $giasp, $img, $mota, $iddm,$SoLuongSP,$_POST['kho']);
+                 
+
+    
+                    // foreach ($selectedKhos as $selectedKho) {
+                    //     inser_kho_sanpham($lastInsertedID, $selectedKho);
+                    // }
                     $thongbao = "Thêm thành công";
                 } else {
                     echo "<script>alert('Vui lòng điền đầy đủ thông tin sản phẩm và chọn hình ảnh!');</script>";
                 }
             }
             $listdanhmuc = loadall_danhmuc();
+            $listKho1 = loadall_kho_type_1();
+            $listKho2 = loadall_kho_type_2();
             include "sanpham/add.php";
             break;
 

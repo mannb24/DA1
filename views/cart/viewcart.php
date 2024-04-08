@@ -29,6 +29,7 @@ if ($thongbao != "") {
                             <th>Số lượng</th>
                             <th>Thành tiền</th>
                             <th>Size</th>
+                            <th>Màu</th>
                             <th>Thao tác</th>
 
                         </tr>
@@ -79,7 +80,10 @@ if ($thongbao != "") {
                                     </span>
                                 </td>
                                 <td>
-                                    <?= $cart['ThanhTien'] ?>
+                                    <?= $cart['size'] ?>
+                                </td>
+                                <td>
+                                    <?= $cart['mau'] ?>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0);" onclick="confirmDelete(<?= $cart['IDGioHang'] ?>)">

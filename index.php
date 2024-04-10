@@ -34,7 +34,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             } else {
                 $iddm = 0;
             }
-            $dssp = loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0);
+            $dssp = loadall_sanpham($kyw = "", $currentpage, $iddm);
+            $total = count(loadall_sanpham($kyw = "", $currentpage = 1, $iddm)) / 10; // Lấy ra total khi currentpage = 1
             $tendm = load_ten_dm($iddm);
             include "./views/categories.php";
             break;
@@ -223,7 +224,6 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                             insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                         }
                     } else {
-
                         insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                     }
                 }
@@ -303,7 +303,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                     $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                     if ($ltSp != null) {
                         foreach ($ltSp as $lt) {
-                            insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
+                            insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong'], $lt['mau'], $lt['size']);
                         }
                     }
                     Delete_All_SP_ForCart($iduser);
@@ -317,16 +317,14 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 if ($pttt == 2) {
                     $bank = Get_Bank();
                     include "./views/thongtinthanhtoan.php";
-                } else
-                    if (isset($_POST['dongydathang'])) {
-                        date_default_timezone_set('Asia/Ho_Chi_Minh');
-                        $ngaydathang = date('d/m/Y h:i:s');
-                        $tongdonhang = tongdonhang($iduser);
-                        $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
-                        if ($ltSp != null) {
-                            foreach ($ltSp as $lt) {
-                                insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
-                            }
+                } else if (isset($_POST['dongydathang'])) {
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $ngaydathang = date('d/m/Y h:i:s');
+                    $tongdonhang = tongdonhang($iduser);
+                    $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
+                    if ($ltSp != null) {
+                        foreach ($ltSp as $lt) {
+                            insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong'], $lt['mau'], $lt['size']);
                         }
                         Delete_All_SP_ForCart($iduser);
                         $taikhoan = loadone_taikhoan($iduser);
@@ -334,6 +332,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                         $billct = loadCT_bill($idbill);
                         include "./views/cart/billconfirm.php";
                     }
+                }
             }
             break;
         case 'mybill':

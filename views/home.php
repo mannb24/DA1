@@ -94,17 +94,6 @@
 
 		</div>
 
-		<nav class="navbar">
-			<ul class="navbar_menu" id="page-links">
-				<li><a class="page-link" href="#">
-						<< </a>
-				</li>
-				<li><a class="page-link" href="index.php?currentpage=1">1</a></li>
-				<li><a class="page-link" href="index.php?currentpage=2">2</a></li>
-				<li><a class="page-link" href="index.php?currentpage=3">3</a></li>
-				<li><a class="page-link" href="#">>></a></li>
-			</ul>
-		</nav>
 	</div>
 </div>
 

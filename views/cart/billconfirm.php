@@ -86,6 +86,8 @@
                                     <th>Sản phẩm</th>
                                     <th>Đơn giá</th>
                                     <th>Số lượng</th>
+                                    <th>Màu</th>
+                                    <th>size</th>
 
                                 </tr>
                             </thead>
@@ -111,6 +113,16 @@
                                         <td class="price">
                                             <span>
                                                 <?= $c["SoLuong"] ?>
+                                            </span>
+                                        </td>
+                                        <td class="price">
+                                            <span>
+                                                <?= $c["mau"] ?>
+                                            </span>
+                                        </td>
+                                        <td class="price">
+                                            <span>
+                                                <?= $c["size"] ?>
                                             </span>
                                         </td>
                                     </tr>

@@ -298,7 +298,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
                 if ($ltSp != null) {
                     foreach ($ltSp as $lt) {
-                        insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
+                    
+                        insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong'], $lt['mau'], $lt['size']);
                     }
                 }
                 Delete_All_SP_ForCart($iduser);

@@ -86,13 +86,15 @@
                                     <th>Sản phẩm</th>
                                     <th>Đơn giá</th>
                                     <th>Số lượng</th>
+                                    <th>Màu</th>
+                                    <th>size</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $tong = 0;
                                 ?>
-                                <?php foreach ($billct as $c): ?>
+                                <?php foreach ($billct as $c) : ?>
 
                                     <tr>
                                         <td class="cart_product_img">
@@ -111,6 +113,16 @@
                                         <td class="price">
                                             <span>
                                                 <?= $c["SoLuong"] ?>
+                                            </span>
+                                        </td>
+                                        <td class="price">
+                                            <span>
+                                                <?= $c["mau"] ?>
+                                            </span>
+                                        </td>
+                                        <td class="price">
+                                            <span>
+                                                <?= $c["size"] ?>
                                             </span>
                                         </td>
                                     </tr>

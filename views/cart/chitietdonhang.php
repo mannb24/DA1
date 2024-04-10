@@ -61,6 +61,8 @@
                                         <th>Sản phẩm</th>
                                         <th>Đơn giá</th>
                                         <th>Số lượng</th>
+                                        <th>Màu </th>
+                                        <th>Size</th>
                                         <th>Thao tác</th>
 
                                     </tr>
@@ -93,6 +95,17 @@
                                                     <?= $c["SoLuong"] ?>
                                                 </span>
                                             </td>
+                                            <td class="price">
+                                                <span>
+                                                    <?= $c["mau"] ?>
+                                                </span>
+                                            </td>
+                                            <td class="price">
+                                                <span>
+                                                    <?= $c["size"] ?>
+                                                </span>
+                                            </td>
+
                                             <td>
                                                 <a href="index.php?act=danhgia&id=<?= $c['IDSanPham'] ?>"><input
                                                         class="btn-info" type="button" value="Đánh giá "></a>

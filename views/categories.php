@@ -86,16 +86,7 @@
 			</div>
 
 			<!-- Main Content -->
-			<script>
-    function checkMaxPrice() {
-        var minPrice = document.getElementById("minPrice").value;
-        var maxPriceInput = document.getElementById("maxPrice");
-
-        if (maxPriceInput.value !== "" && parseInt(maxPriceInput.value) < parseInt(minPrice)) {
-            maxPriceInput.value = minPrice;
-        }
-    }
-</script>
+			
 			<div class="main_content">
 
 				<!-- Products -->

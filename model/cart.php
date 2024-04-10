@@ -22,7 +22,7 @@ function insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang)
     return pdo_execute_return_lastInsertID($sql);
 }
 
-function insert_cart($iduser, $idpro, $soluong, $thanhtien,$mau,$size)
+function insert_cart($iduser, $idpro, $soluong, $thanhtien, $mau, $size)
 {
     $sql = "INSERT INTO giohang(IDNguoi,IDSanPham,SoLuong,ThanhTien,mau,size) values('$iduser','$idpro','$soluong','$thanhtien','$mau','$size')";
     return pdo_execute($sql);
@@ -42,10 +42,13 @@ function Delete_billForUser($id, $idUser)
 }
 function loadCT_bill($id)
 {
-    $sql = "select h.SoLuong,s.* from hoadon_sanpham h JOIN sanpham s on s.IDSanPham = h.IDSanPham where IDHoaDon =" . $id;
+    $sql = "SELECT h.SoLuong, s.*, h.mau, h.size FROM hoadon_sanpham h 
+            JOIN sanpham s ON s.IDSanPham = h.IDSanPham 
+            WHERE h.IDHoaDon = $id";
     $bill = pdo_query($sql);
     return $bill;
 }
+
 function load_cart($iduser)
 {
     $sql = "select * from giohang where IDNguoi =" . $iduser;
@@ -83,7 +86,7 @@ function loadall_bill($iduser)
 }
 function loadcart_cthoadon($id)
 {
-    $sql = "SELECT h.IDHoaDon, h.SoLuong,s.* FROM hoadon_sanpham h join sanpham s on s.IDSanPham = h.IDSanPham WHERE IDHoaDon  = $id";
+    $sql = "SELECT h.IDHoaDon, h.SoLuong,h.mau,h.size,s.* FROM hoadon_sanpham h join sanpham s on s.IDSanPham = h.IDSanPham WHERE IDHoaDon  = $id";
     $product = pdo_query($sql);
     return $product;
 }
@@ -114,9 +117,9 @@ function update_bill_chuathanhtoan($bill_thanhtoan, $bill_satus)
     pdo_execute($sql);
 }
 
-function insert_bill_sp($idhoadon, $idsanpham, $SoLuong)
+function insert_bill_sp($idhoadon, $idsanpham, $SoLuong, $mau,$size)
 {
-    $sql = "INSERT INTO hoadon_sanpham(IDHoaDon,IDSanPham, SoLuong) values('$idhoadon','$idsanpham',$SoLuong)";
+    $sql = "INSERT INTO hoadon_sanpham(IDHoaDon,IDSanPham, SoLuong,mau,size ) values('$idhoadon','$idsanpham','$SoLuong','$mau','$size')";
     return pdo_execute($sql);
 }
 function Delete_SP_ForCart($idGioHang)
@@ -186,6 +189,4 @@ function delete_donhang($id)
 {
     $sql = "delete from hoadon where IDHoaDon=" . $id;
     pdo_execute($sql);
-
 }
-?>

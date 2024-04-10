@@ -94,8 +94,12 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="index.php?act=danhgia&id=<?= $c['IDSanPham'] ?>"><input
-                                                        class="btn-info" type="button" value="Đánh giá "></a>
+                                                <?php
+                                                if ($bill['TrangThai'] == 3) { ?>
+                                                    <a href="index.php?act=danhgia&id=<?= $c['IDSanPham'] ?>"><input
+                                                            class="btn-info" type="button" value="Đánh giá "></a>
+                                                <?php } ?>
+
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

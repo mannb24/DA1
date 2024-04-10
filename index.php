@@ -223,7 +223,8 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                             insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                         }
                     } else {
-                        insert_cart($iduser, $id, $soluong, $thanhtien, $mau, $size);
+
+                        insert_cart($iduser, $id, $soluong, $ttien, $mau, $size);
                     }
                 }
             } else {
@@ -280,33 +281,60 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             break;
         case 'billcomfirm':
             $qr = "";
-            if (isset($_POST['dongydathang'])) {
-                if (isset($_SESSION['user']['IDNguoi'])) {
-                    $iduser = $_SESSION['user']['IDNguoi'];
+            if (isset($_SESSION['user']['IDNguoi'])) {
+                $iduser = $_SESSION['user']['IDNguoi'];
+            } else {
+                $iduser = 0;
+            }
+            $ltSp = GetInfor_SpForUserID($iduser);
+
+            if (isset($_GET['err'])) {
+                $err = $_GET['err'];
+                if ($err == "true") {
+                    echo "<h3 style='margin-left:80px;color:red'>Đặt hàng không thành công!</h3>
+                    <head>
+                        <meta http-equiv='refresh' content='5;url=index.php'>
+                    </head>";
                 } else {
-                    $iduser = 0;
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $ngaydathang = date('d/m/Y h:i:s');
+                    $tongdonhang = tongdonhang($iduser);
+                    $pttt = 2;
+                    $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
+                    if ($ltSp != null) {
+                        foreach ($ltSp as $lt) {
+                            insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
+                        }
+                    }
+                    Delete_All_SP_ForCart($iduser);
+                    $taikhoan = loadone_taikhoan($iduser);
+                    $bill = loadone_bill($idbill);
+                    $billct = loadCT_bill($idbill);
+                    include "./views/cart/billconfirm.php";
                 }
-                $ltSp = GetInfor_SpForUserID($iduser);
+            } else {
                 $pttt = $_POST['pttt'];
                 if ($pttt == 2) {
                     $bank = Get_Bank();
-                    include "./views/cart/viewbank.php";
-                }
-                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                $ngaydathang = date('d/m/Y h:i:s');
-                $tongdonhang = tongdonhang($iduser);
-                $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
-                if ($ltSp != null) {
-                    foreach ($ltSp as $lt) {
-                        insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
+                    include "./views/thongtinthanhtoan.php";
+                } else
+                    if (isset($_POST['dongydathang'])) {
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $ngaydathang = date('d/m/Y h:i:s');
+                        $tongdonhang = tongdonhang($iduser);
+                        $idbill = insert_bill($iduser, $pttt, $ngaydathang, $tongdonhang);
+                        if ($ltSp != null) {
+                            foreach ($ltSp as $lt) {
+                                insert_bill_sp($idbill, $lt['IDSanPham'], $lt['SoLuong']);
+                            }
+                        }
+                        Delete_All_SP_ForCart($iduser);
+                        $taikhoan = loadone_taikhoan($iduser);
+                        $bill = loadone_bill($idbill);
+                        $billct = loadCT_bill($idbill);
+                        include "./views/cart/billconfirm.php";
                     }
-                }
-                Delete_All_SP_ForCart($iduser);
             }
-            $taikhoan = loadone_taikhoan($iduser);
-            $bill = loadone_bill($idbill);
-            $billct = loadCT_bill($idbill);
-            include "./views/cart/billconfirm.php";
             break;
         case 'mybill':
             $listbill = loadall_bill($_SESSION['user']['IDNguoi']);

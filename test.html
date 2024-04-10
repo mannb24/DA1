@@ -1,0 +1,42 @@
+<style>
+    body {
+        counter-reset: number;
+    }
+
+    .pageFooter {
+        page-break-after: always;
+        counter-increment: pageNumber;
+    }
+
+    .pageFooter::after {
+        content: '-' counter(pageNumber) '-';
+    }
+</style>
+
+<div style='position: fixed; bottom: 25px;  right: 0;left: 40px ; text-align: center; '>
+    <table style='width: 190mm;left: 40px;'>
+        <tr>
+            <td colspan='2' style='border: 2px solid #808080;'>
+                <div>
+                    <div style='display: flex;font-size: 13px;'>
+                        <div
+                            style='border: 2px solid #808080; border-radius: 50%; width:18px ;height:18px;margin:5px 0 -25px 5px;font-weight: 700;text-align: center;color: #808080;'>
+                            10</div>
+                        <div style='margin-top: 5px;margin-left: 15px; color: #808080; padding-bottom: 20px;'> NGƯỜI
+                            NỘP
+                            ĐƠN/ĐẠI DIỆN CỦA NGƯỜI NỘP ĐƠN KÝ TÊN </div>
+                    </div>
+                </div>
+                <div style='height: 20px;'></div>
+            </td>
+        </tr>
+    </table>
+</div>
+<span class='pageFooter'
+    style='font-size: 15px;position: fixed; bottom: 5px; left: 0; right: 0; text-align: center; '></span>
+<div class='pageFooter' style='font-size: 15px;position: fixed; bottom: 5px; left: 0; right: 0; text-align: center; '>
+    <div class='pageFooter'
+        style='font-size: 15px;position: fixed; bottom: 5px; left: 0; right: 0; text-align: center; '>
+        <div class='pageFooter'
+            style='font-size: 15px;position: fixed; bottom: 5px; left: 0; right: 0; text-align: center; '>
+        </div>

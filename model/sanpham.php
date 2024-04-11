@@ -1,5 +1,5 @@
 <?php
-function inser_sanpham($tensp, $price, $img, $mota, $iddm,$SoLuongSP,$listKho)
+function inser_sanpham($tensp, $price, $img, $mota, $iddm, $SoLuongSP, $listKho)
 {
     $sql = "insert into sanpham (TenSanPham,Gia,AnhBia,Mota,IDDanhMuc,SoLuongSP) values('$tensp','$price','$img','$mota','$iddm','$SoLuongSP')";
     // pdo_execute($sql);
@@ -11,7 +11,7 @@ function inser_sanpham($tensp, $price, $img, $mota, $iddm,$SoLuongSP,$listKho)
                 VALUES ('$lastInsertedID', '$IDKho')";
         pdo_execute($sql1);
     }
-    
+
 
 }
 
@@ -31,7 +31,7 @@ function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
 {
     $sql = "select * from sanpham where 1 ";
     if ($kyw != "") {
-        $sql .= " and TenSanPham like '%" . $kyw . "%'";
+        $sql .= " and TenSanPham LIKE CONCAT('%'," . "'$kyw'" . ",'%')";
     }
 
     if ($iddm > 0) {
@@ -41,12 +41,54 @@ function loadall_sanpham($kyw = "", $currentpage = 1, $iddm = 0)
 
     $sql .= "order by IDSanPham desc";
     $pagesize = 10;
-    if ($currentpage == 1 || $currentpage == 0) {
-        $sql .= " limit 0,$pagesize";
-    } else {
-        $currentpage = ($currentpage - 1) * $pagesize;
-        $sql .= " limit $currentpage,$pagesize";
+    if ($currentpage != 0) {
+        if ($currentpage == 1) {
+            $sql .= " limit 0,$pagesize";
+        } else {
+            $currentpage = ($currentpage - 1) * $pagesize;
+            $sql .= " limit $currentpage,$pagesize";
+        }
     }
+    $listsanpham = pdo_query($sql);
+    return $listsanpham;
+}
+function loadall_sanpham_Sort($kyw = "", $currentpage = 1, $iddm = 0, $minPrice = 0, $maxPrice = 0, $category = 0)
+{
+    $sql = "select * from sanpham where 1 ";
+    if ($kyw != "") {
+        $sql .= " and TenSanPham LIKE CONCAT('%'," . "'$kyw'" . ",'%')";
+    }
+    if ($iddm > 0) {
+        $sql .= " and IDDanhMuc= '" . $iddm . "'";
+    }
+    if ($minPrice > 0) {
+        $sql .= " and Gia >= '" . $minPrice . "'";
+    }
+    if ($maxPrice > 0) {
+        $sql .= " and Gia <= '" . $maxPrice . "'";
+    }
+    if ($category > 0) {
+        if ($category == 1) {
+            $sql .= "order by Gia asc";
+        } else if ($category == 2) {
+            $sql .= "order by Gia desc";
+        } else if ($category == 3) {
+            $sql .= "order by NgayTao desc";
+        }
+    } else {
+        $sql .= "order by IDSanPham desc";
+    }
+    $pagesize = 12;
+    if ($currentpage != 0) {
+        if ($currentpage == 1) {
+            $sql .= " limit 0,$pagesize";
+        } else {
+            $currentpage = ($currentpage - 1) * $pagesize;
+            $sql .= " limit $currentpage,$pagesize";
+        }
+    }
+
+    // echo "<script>console.log('$sql')</script>";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

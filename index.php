@@ -23,19 +23,26 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
     $act = $_GET['act'];
     switch ($act) {
         case 'categories':
+            $kyw = "";
+            $iddm = 0;
+            $minPrice = 0;
+            $maxPrice = 0;
+            $category = 0;
             if (isset($_POST['kyw']) && ($_POST['kyw'] != "")) {
                 $kyw = $_POST['kyw'];
-            } else {
-                $kyw = "";
             }
 
             if (isset($_GET['iddm']) && ($_GET['iddm'] > 0)) {
                 $iddm = $_GET['iddm'];
-            } else {
-                $iddm = 0;
             }
-            $dssp = loadall_sanpham($kyw = "", $currentpage, $iddm);
-            $total = count(loadall_sanpham($kyw = "", $currentpage = 1, $iddm)) / 10; // Lấy ra total khi currentpage = 1
+            if (isset($_POST['timkiem'])) {
+                $kyw = $_POST['productName'];
+                $minPrice = $_POST['minPrice'];
+                $maxPrice = $_POST['maxPrice'];
+                $category = $_POST['category'];
+            }
+            $dssp = loadall_sanpham_Sort($kyw, $currentpage, $iddm, $minPrice, $maxPrice, $category);
+            $total = count(loadall_sanpham_Sort($kyw, 0, $iddm, $minPrice, $maxPrice, $category)) / 12; // Lấy ra total khi currentpage = 1
             $tendm = load_ten_dm($iddm);
             include "./views/categories.php";
             break;

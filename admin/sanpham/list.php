@@ -137,12 +137,11 @@
                                                 <li><a class="page-link" href="#">
                                                         << </a>
                                                 </li>
-                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=1">1</a>
-                                                </li>
-                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=2">2</a>
-                                                </li>
-                                                <li><a class="page-link" href="index.php?act=listsp&currentpage=3">3</a>
-                                                </li>
+                                                <?php for ($i = 0; $i < $total; $i++) { ?>
+                                                    <li><a class="page-link"
+                                                            href="index.php?act=listsp&currentpage=<?= $i + 1 ?>"><?= $i + 1 ?></a>
+                                                    </li>
+                                                <?php } ?>
                                                 <li><a class="page-link" href="#">>></a></li>
                                             </ul>
                                         </nav>

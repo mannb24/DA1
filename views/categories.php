@@ -58,10 +58,10 @@
 						<div class="sidebar_title">
 							<h5>Lọc sản phẩm</h5>
 						</div>
-						<form id="filterForm" action="index.php?act=categories" method="post">
+						<form id="filterForm" action="index.php?act=categories&iddm=<?= $iddm ?>" method="post">
 							<div class="form-group">
 								<label for="productName">Tên sản phẩm:</label>
-								<input type="text" class="form-control" id="productName" name="">
+								<input type="text" class="form-control" id="productName" name="productName">
 							</div>
 							<div class="form-group">
 								<label for="minPrice">Giá từ:</label>
@@ -73,13 +73,12 @@
 								<input type="number" class="form-control" id="maxPrice" name="maxPrice">
 							</div>
 							<div class="form-group">
-								<label for="category">Danh mục:</label>
+								<label for="category">Lọc nâng cao:</label>
 								<select class="form-control" id="category" name="category">
-									<option value="">Tất cả</option>
-
-									<?php foreach ($dmsp as $dm): ?>
-										<option value="<?= $dm['IDDanhMuc'] ?>"><?= $dm['TenDanhMuc'] ?></option>
-									<?php endforeach; ?>
+									<option value="0">Tất cả</option>
+									<option value="1">Giá thấp đến cao</option>
+									<option value="2">Giá cao đến thấp</option>
+									<option value="3">Mới nhất</option>
 								</select>
 							</div>
 							<button type="submit" class="btn btn-primary" name="timkiem">Lọc</button>

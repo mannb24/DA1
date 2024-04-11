@@ -50,10 +50,10 @@ if (isset($_GET['act'])) {
         case 'addKho':
             if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
                 if (isset($_POST['tenkho']) && !empty($_POST['tenkho'])) {
-                   
+
                     $tenloai = $_POST['tenkho'];
                     $Type = $_POST['type'];
-                    
+
                     insert_kho($tenloai, $Type);
                     $thongbao = "Thêm thành công";
                 } else {
@@ -127,10 +127,10 @@ if (isset($_GET['act'])) {
                         //
                     }
 
-                    inser_sanpham($tensp, $giasp, $img, $mota, $iddm,$SoLuongSP,$_POST['kho']);
-                 
+                    inser_sanpham($tensp, $giasp, $img, $mota, $iddm, $SoLuongSP, $_POST['kho']);
 
-    
+
+
                     // foreach ($selectedKhos as $selectedKho) {
                     //     inser_kho_sanpham($lastInsertedID, $selectedKho);
                     // }
@@ -147,7 +147,7 @@ if (isset($_GET['act'])) {
 
 
         case 'listsp':
-            if (isset($_POST['listok']) && ($_POST['listok'])) {
+            if (isset($_POST['timkiem'])) {
                 $kyw = $_POST['kyw'];
                 $iddm = $_POST['iddm'];
             } else {
@@ -158,6 +158,7 @@ if (isset($_GET['act'])) {
             if (isset($_GET['currentpage'])) {
                 $currentpage = $_GET['currentpage'];
             }
+            $total = count(loadall_sanpham($kyw, 0, $iddm)) / 10;
             $listdanhmuc = loadall_danhmuc();
             $listsanpham = loadall_sanpham($kyw, $currentpage, $iddm);
             include "sanpham/list.php";

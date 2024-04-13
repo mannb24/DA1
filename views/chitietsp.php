@@ -309,3 +309,23 @@
 		</div>
 	</div>
 </div>
+
+<!-- Script JavaScript -->
+<script>
+    // Lấy phần tử input số lượng
+    var quantityInput = document.getElementById('quantity');
+
+    // Lấy nút "tăng" và gắn sự kiện click
+    document.querySelector('.plus').addEventListener('click', function() {
+        // Tăng giá trị số lượng khi nhấn nút "tăng"
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    // Lấy nút "giảm" và gắn sự kiện click
+    document.querySelector('.minus').addEventListener('click', function() {
+        // Giảm giá trị số lượng khi nhấn nút "giảm"
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+</script>

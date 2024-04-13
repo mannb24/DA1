@@ -12,12 +12,24 @@
 
 
     <!-- plugin css -->
-    <link href="..\assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
+    <link href=".\assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
 
     <!-- App css -->
     <link href=".\assets\css\bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href=".\assets\css\icons.min.css" rel="stylesheet" type="text/css">
     <link href=".\assets\css\app.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+        /* Ẩn các submenu mặc định */
+.nav-second-level {
+    display: none;
+}
+
+/* Hiển thị submenu khi có lớp 'show' */
+.nav-second-level.show {
+    display: block;
+}
+    </style>
 </head>
 
 <body>
@@ -347,20 +359,51 @@
         <div class="rightbar-overlay"></div>
 
         <!-- Vendor js -->
-        <script src="assets\js\vendor.min.js"></script>
+        <script src=".\assets\js\vendor.min.js"></script>
 
         <!-- Third Party js-->
-        <script src="..\assets\libs\peity\jquery.peity.min.js"></script>
-        <script src="..\assets\libs\apexcharts\apexcharts.min.js"></script>
-        <script src="..\assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="..\assets\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js"></script>
+        <script src=".\assets\libs\peity\jquery.peity.min.js"></script>
+        <script src=".\assets\libs\apexcharts\apexcharts.min.js"></script>
+        <script src=".\assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js"></script>
+        <script src=".\assets\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js"></script>
 
         <!-- Dashboard init -->
-        <script src="..\assets\js\pages\dashboard-1.init.js"></script>
+        <script src=".\assets\js\pages\dashboard-1.init.js"></script>
 
         <!-- App js -->
-        <script src="..\assets\js\app.min.js"></script>
+        <script src=".\assets\js\app.min.js"></script>
 
 
 
     </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var menuArrows = document.querySelectorAll('.menu-arrow');
+
+    menuArrows.forEach(function(arrow) {
+        arrow.addEventListener('click', function() {
+            // Lấy phần tử ul kế tiếp
+            var submenu = this.nextElementSibling;
+
+            // Kiểm tra xem submenu có tồn tại không
+            if (submenu) {
+                // Kiểm tra nếu submenu đã có lớp 'show'
+                if (submenu.classList.contains('show')) {
+                    submenu.classList.remove('show');
+                } else {
+                    // Ẩn tất cả các submenu khác
+                    var allSubmenus = document.querySelectorAll('.nav-second-level');
+                    allSubmenus.forEach(function(submenu) {
+                        submenu.classList.remove('show');
+                    });
+
+                    // Hiển thị submenu hiện tại
+                    submenu.classList.add('show');
+                }
+            }
+        });
+    });
+});
+
+    </script>

@@ -61,8 +61,7 @@
                                 <div class="row">
                                     <div class="col-md-6 offset-md-6">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm"
-                                                name="kyw">
+                                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="kyw">
                                             <input type="hidden" name="listok" value="1">
                                             <!-- Giá trị này chỉ ra rằng biểu mẫu đã được gửi đi -->
                                             <div class="input-group-append">
@@ -98,6 +97,7 @@
                                                     extract($sanpham);
                                                     $suasp = "index.php?act=suasp&id=" . $IDSanPham;
                                                     $xoasp = "index.php?act=xoasp&id=" . $IDSanPham;
+                                                    $list= "index.php?act=listDD&id=" . $IDSanPham;
                                                     $hinhpath = "../views/images/" . $AnhBia;
                                                     if (is_file($hinhpath)) {
                                                         $hinh = "<img src='" . $hinhpath . "' height='80'>";
@@ -122,9 +122,11 @@
                                                                     <input class="btn-danger" type="button" value="Xóa">
                                                                 </a>
                                                                 
-                                                                <a href="listdanhgia.php" >
+                                                                <a href='. $list.'>
                                                                     <input class="btn-danger" type="button" value="Danh sách đánh giá">
-                                                                </a>
+                                                                                </a>
+
+                                                            
                                                             </td>
                                                         </tr>
                                                     ';
@@ -138,22 +140,17 @@
                                                         << </a>
                                                 </li>
                                                 <?php for ($i = 0; $i < $total; $i++) { ?>
-                                                    <li><a class="page-link"
-                                                            href="index.php?act=listsp&currentpage=<?= $i + 1 ?>"><?= $i + 1 ?></a>
+                                                    <li><a class="page-link" href="index.php?act=listsp&currentpage=<?= $i + 1 ?>"><?= $i + 1 ?></a>
                                                     </li>
                                                 <?php } ?>
                                                 <li><a class="page-link" href="#">>></a></li>
                                             </ul>
                                         </nav>
                                         <div class="input_button">
-                                            <input onclick="selects()" class="btn-info" type="button"
-                                                value="Chọn tất cả">
-                                            <input onclick="deSelect()" class="btn-info" type="button"
-                                                value="Bỏ chọn tất cả">
-                                            <input onclick="confirmDeleteSelected()" class="btn-danger" type="button"
-                                                value="Xóa các mục đã chọn">
-                                            <a href="index.php?act=addsp"><input class="btn-success" type="button"
-                                                    value="Nhập thêm"></a>
+                                            <input onclick="selects()" class="btn-info" type="button" value="Chọn tất cả">
+                                            <input onclick="deSelect()" class="btn-info" type="button" value="Bỏ chọn tất cả">
+                                            <input onclick="confirmDeleteSelected()" class="btn-danger" type="button" value="Xóa các mục đã chọn">
+                                            <a href="index.php?act=addsp"><input class="btn-success" type="button" value="Nhập thêm"></a>
                                         </div>
                                     </div>
                                 </div>

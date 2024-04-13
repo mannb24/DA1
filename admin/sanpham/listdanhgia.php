@@ -1,175 +1,90 @@
-<style>
-    * {
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1vw;
-    }
-
-    .row {
-        float: left;
-        width: 100%;
-    }
-
-    .mb {
-        margin-bottom: 15px;
-    }
-
-    .mb10 {
-        margin-bottom: 10px;
-    }
-
-    .demo {
-        min-height: 100px;
-        background-color: aqua;
-    }
-
-    .mr {
-        margin-right: 2%;
-    }
-
-    /* boxtaikhoan */
-    .formtaikhoan {
-        line-height: 150%;
-    }
-
-    .formtaikhoan input[type="text"],
-    .formtaikhoan input[type="email"],
-    .formtaikhoan input[type="password"],
-    .frmcontent input[type="text"] {
-        padding: 5px 10px;
-        margin: 7px;
-        width: 100%;
-        border: 1px #CCC solid;
-        border-radius: 5px;
-    }
-
-    .formtaikhoan input[type="checkbox"] {
-        border-radius: 7px;
-    }
-
-    .formtaikhoan input[type="submit"],
-    .frmcontent input[type="submit"],
-    .formtaikhoan input[type="reset"],
-    .frmcontent input[type="reset"],
-    .frmcontent input[type="button"] {
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin: 7px;
-        background-color: white;
-        border: 1px #CCC solid;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bình luận</title>
+    <!-- Include any necessary stylesheets and scripts here -->
+</head>
+<?php
+if (isset($_GET['id']) && $_GET['id'] > 0) {
+    $id = $_GET['id'];
+    $listbl = loadall_bl_sao($id);
+} else {
+    echo "Không có ID sản phẩm được cung cấp.";
+}
 
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #333;
-        color: #333;
-    }
 
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        text-align: center;
-    }
+?>
 
-    section {
-        padding: 20px;
-    }
 
-    .card {
-        background-color: #fff;
-        padding: 20px;
-        margin: 10px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th,
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #4CAF50;
-        color: black;
-    }
-
-    .row10.button {
-        padding: 7px;
-        border: 3px;
-        box-sizing: 3px;
-    }
-</style>
-<h1>dđmmm</h1>
-<div class="content-page">
-    <div class="content">
-
-        <!-- Start Content-->
-        <div class="container-fluid">
-
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="index.php">Trang chủ admin</a></li>
-                                <li class="breadcrumb-item active">Danh sách đánh giá</li>
-                            </ol>
+<body>
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h3 class="page-title">BÌNH LUẬN</h3>
                         </div>
-                        <h3 class="page-title">Danh sách đánh giá</h3>
-                    </div>
+                        <div class="container-fluid">
+                            <h1 class="h3 mb-2 text-gray-800">DANH SÁCH BÌNH LUẬN</h1>
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="commentTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th> Số Sao</th>
+                                                    <th>Người bình luận</th>
+                                                    <th>Nội dung</th>
+                                                    <th>Ngày bình luận</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Kiểm tra xem biến $listbl đã được khởi tạo chưa
+                                                if (isset($listbl)) {
+                                                    // Nếu có dữ liệu, thực hiện vòng lặp để hiển thị
+                                                    foreach ($listbl as $bl) {
+                                                        echo '
+                    <tr>
+                        <td>' . $bl['Sao'] . '</td>
+                        <td>' . $bl['Ten'] . '</td>
+                        <td>' . $bl['NoiDung'] . '</td>
+                        <td>' . $bl['NgayBinhLuan'] . '</td>
+                       
+                    </tr>
+                ';
+                                                    }
+                                                } else {
+                                                    // Nếu không có dữ liệu, hiển thị thông báo
+                                                    echo '<tr><td colspan="5">Không có dữ liệu để hiển thị.</td></tr>';
+                                                }
+                                                ?>
+                                                <!-- Kết thúc dữ liệu bình luận -->
+                                            </tbody>
+                                        </table>
 
-                    <section>
-                        <div class="card">
-
-                            <table>
-                                <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th></th>
-
-                                </tr>
-                                <?php
-                                foreach ($listKho as $kho) {
-                                    extract($kho);
-                                    $suadm = "index.php?act=suaKho&id=" . $IDKho;
-                                    $xoadm = "index.php?act=xoaKho&id=" . $IDKho;
-                                    echo '<tr>
-                                    <td><input type="checkbox"></td>
-                                    <td>' . $IDKho . '</td>
-                                    <td>' . $TenLoai . '</td>
-                                    <td><a href="' . $suadm . '"><input type="button" value="Sửa"></a> <a href="' . $xoadm . '"><input type="button" value="Xoá"></a></td>
-                                </tr>';
-                                }
-                                ?>
-                            </table>
-                            <br>
-                            <div class="row10">
-                                <input type="button" value="Chọn tất cả">
-                                <input type="button" value="Bỏ chọn tất cả">
-                                <input type="button" value="Xoá các mục đã chọn">
-                                <a href="index.php?act=addKho"> <input type="button" value="Nhập thêm"></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                    </section>
-
+                    </div>
                 </div>
             </div>
-
         </div>
-        <!-- end page title -->
+    </div>
+
+
+    <!-- Script và các hàm JavaScript -->
+    <script type="text/javascript">
+        // Các hàm JavaScript có thể được thêm ở đây
+    </script>
+
+</body>
+
+</html>

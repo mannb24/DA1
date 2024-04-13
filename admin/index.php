@@ -33,6 +33,15 @@ if (isset($_GET['act'])) {
             include "danhmuc/list.php";
             break;
 
+        case 'listDD':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $id = $_GET['id'];
+                $listbl = loadall_bl_sao($id);
+               
+            }
+            include "sanpham/listdanhgia.php";
+            break;
+
         case 'xoadm':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_danhmuc($_GET['id']);

@@ -14,6 +14,21 @@ function inser_sanpham($tensp, $price, $img, $mota, $iddm, $SoLuongSP, $listKho)
 
 
 }
+function loadall_bl_sao($id)
+{
+    $sql =  "SELECT BL.NoiDung,BL.Sao,BL.IDSanPham,BL.NgayBinhLuan, BL.NgayBinhLuan, U.Ten
+    FROM danhgia BL
+    JOIN user U ON BL.IDNguoi = U.IDNguoi 
+    WHERE BL.IDSanPham = $id AND BL.Sao > 0";
+    // var_dump($sql);
+    // die;
+    $listbl = pdo_query($sql);
+    return $listbl;
+}
+
+
+
+
 
 function delete_sanpham($id)
 {
